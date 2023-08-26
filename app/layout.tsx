@@ -6,6 +6,7 @@ import StyledComponentsRegistry from "@/lib/registry";
 import GlobalStyles from "@/styles/GlobalStyles";
 import { ThemeProvider } from "styled-components";
 import theme from "@/styles/theme";
+import Providers from "./Providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,13 +23,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <StyledComponentsRegistry>
+        <Providers>
           <GlobalStyles />
-          {/* <ThemeProvider theme={theme}> */}
           <Header />
           {children}
-          {/* </ThemeProvider> */}
-        </StyledComponentsRegistry>
+        </Providers>
       </body>
     </html>
   );

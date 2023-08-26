@@ -3,24 +3,27 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
   // your global styles
-  html,
-  body {
-    padding: 0;
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-      border: 0;
-    height: 100%;
-    width: 100%;
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-
   * {
     box-sizing: border-box;
+  }
+
+  html, body { 
+    width: 100%;
+    height: 100%;
+    min-width: 1200px;
+    background-color: #ffffff;
+    font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI;
+    font-size : 16px;
+    color: rgb(58, 58, 58);
+  }
+
+  ul, ol {
+    list-style: none;
+  } 
+
+  button {
+    all: unset;
+    cursor: pointer;
   }
 `;
 
