@@ -7,6 +7,7 @@ import GlobalStyles from "@/styles/GlobalStyles";
 import { ThemeProvider } from "styled-components";
 import theme from "@/styles/theme";
 import Providers from "./Providers";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,6 +28,7 @@ export default function RootLayout({
           <GlobalStyles />
           <Header />
           {children}
+          <Footer />
         </Providers>
       </body>
     </html>
