@@ -24,7 +24,7 @@ export const SearchTabContainer = styled.div`
     flex-direction: column;
     padding-bottom: 7rem;
     height: 90vh;
-    padding-top: 13rem;
+    /* padding-top: 13rem; */
   }
 `;
 
@@ -40,7 +40,6 @@ export const HeroText = styled.div`
 export const SubHeader = styled.div`
   width: 100%;
   margin: auto 1rem;
-  padding: 3rem;
   ul {
     list-style-type: none;
     display: flex;
@@ -72,10 +71,15 @@ export const SubHeader = styled.div`
         color: white;
       }
 
-      @media (min-width: 600px) {
-        /* width: 15%; */
+      /* @media (min-width: 600px) {
         background: #00000059;
         color: white;
+      } */
+
+      @media (max-width: 768px) {
+        svg {
+          display: none;
+        }
       }
 
       svg {
