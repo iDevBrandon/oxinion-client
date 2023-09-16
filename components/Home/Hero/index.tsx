@@ -5,7 +5,7 @@ import { HeroContainer, SearchTabContainer, SubHeader } from "./styles";
 import { MdOutlineExplore } from "react-icons/md";
 import { TbPlaneDeparture } from "react-icons/tb";
 import { AiOutlineDollar } from "react-icons/ai";
-import { HiOutlineFire } from "react-icons/hi";
+import { FaHandshakeSimple } from "react-icons/fa6";
 import Link from "next/link";
 const Hero = () => {
   return (
@@ -23,8 +23,8 @@ const Hero = () => {
                 <Link href="/discover">Discover</Link>
               </li>
               <li>
-                <HiOutlineFire />
-                <Link href="/trends">Trends</Link>
+                <FaHandshakeSimple />
+                <Link href="/rent">Rent</Link>
               </li>
               <li>
                 <TbPlaneDeparture />
