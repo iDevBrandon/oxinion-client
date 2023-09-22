@@ -43,7 +43,7 @@ export const DefaultButton = styled.button<IStyle>`
 
 export const HeaderGroup = styled.header<IStyle>`
   /* background: #f9f9f9; */
-  background-color: ${({ theme }) => theme.colors.colorName1};
+  /* background-color: ${({ theme }) => theme.colors.colorName1}; */
 
   justify-content: center;
   align-items: center;
