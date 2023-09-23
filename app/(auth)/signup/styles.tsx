@@ -6,5 +6,5 @@ export const AuthFormContainer = styled.div`
   width: 450px;
   border-radius: 5px;
   height: 50vh;
-  margin: 7rem auto;  
+  margin: 7rem auto;
 `;

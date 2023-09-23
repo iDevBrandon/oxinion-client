@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import React, { useCallback, useState } from "react";
+import { AuthFormContainer } from "./styles";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -16,7 +17,7 @@ const Signup = () => {
   }, []);
 
   return (
-    <div>
+    <AuthFormContainer>
       <div>
         <h1>Sign up for OXINION</h1>
       </div>
@@ -44,7 +45,7 @@ const Signup = () => {
           </Link>
         </div>
       </form>
-    </div>
+    </AuthFormContainer>
   );
 };
 
