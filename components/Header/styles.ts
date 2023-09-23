@@ -159,17 +159,20 @@ export const ExtraMenu = styled.button`
 `;
 
 export const LoginButton = styled.button`
-  border: 2px solid #002663;
-  display: block;
-  border-radius: 4px;
-  color: white;
-  background-color: #002663;
-  min-height: 36px;
-  padding: 6px 8px;
-  font-weight: 700;
-  font-size: 16px;
-  margin-left: 16px;
-  border-radius: 30px;
+  a {
+    border: 2px solid #002663;
+    display: block;
+    border-radius: 4px;
+    color: white;
+    background-color: #002663;
+    min-height: 36px;
+    padding: 6px 8px;
+    font-weight: 700;
+    font-size: 16px;
+    margin-left: 16px;
+    border-radius: 30px;
+    text-decoration: none;
+  }
   @media (min-width: 768px) {
   }
 `;

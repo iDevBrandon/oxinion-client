@@ -1,13 +1,13 @@
 import Destination from "@/components/Home/Destination";
 import Hero from "@/components/Home/Hero";
-import RecentPosts from "@/components/Home/RecentPosts";
+import Trending from "@/components/Home/Trending";
 
 export default function Home() {
   return (
     <main>
       <Hero />
       <Destination />
-      <RecentPosts />
+      <Trending />
     </main>
   );
 }
