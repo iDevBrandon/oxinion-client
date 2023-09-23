@@ -4,6 +4,7 @@ import React from "react";
 import {
   SeeMore,
   SeeMoreContainer,
+  TrendingContainer,
   TrendingItem,
   TrendingList,
 } from "./styles";
@@ -12,7 +13,7 @@ import Link from "next/link";
 
 const Trending = () => {
   return (
-    <div style={{ padding: "1rem" }}>
+    <TrendingContainer>
       <h2 style={{ marginBottom: "16px" }}>Top Posts</h2>
       <TrendingList>
         <TrendingItem>Item 1</TrendingItem>
@@ -28,7 +29,7 @@ const Trending = () => {
           <Link href="/explore">See More</Link>
         </SeeMore>
       </SeeMoreContainer>
-    </div>
+    </TrendingContainer>
   );
 };
 

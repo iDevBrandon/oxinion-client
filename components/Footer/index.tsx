@@ -102,7 +102,7 @@ const Footer = () => {
           style={{
             position: "relative",
             width: "200px",
-            paddingBottom: "20%",
+            paddingBottom: "100px",
             left: "50%",
             transform: "translateX(-50%)",
           }}
