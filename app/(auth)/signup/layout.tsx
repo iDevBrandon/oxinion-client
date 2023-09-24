@@ -3,7 +3,7 @@ import React from "react";
 import Signup from "./page";
 
 export const metadata: Metadata = {
-  title: "OXINION - Sign Up",
+  title: "OXINION | Sign Up",
   description: "Join OXINION today!",
 };
 

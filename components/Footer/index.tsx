@@ -110,8 +110,7 @@ const Footer = () => {
           <Image
             src={OXINIONLogo}
             alt="oxinion"
-            layout="fill"
-            objectFit="contain"
+            style={{ width: "auto", height: "auto" }}
           />
         </div>
 
