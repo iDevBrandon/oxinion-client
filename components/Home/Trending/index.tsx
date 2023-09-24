@@ -26,7 +26,7 @@ const Trending = () => {
       <SeeMoreContainer>
         <SeeMore>
           <FiChevronDown />
-          <Link href="/explore">See More</Link>
+          <Link href="/discover">See More</Link>
         </SeeMore>
       </SeeMoreContainer>
     </TrendingContainer>

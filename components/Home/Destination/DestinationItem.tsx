@@ -6,7 +6,7 @@ import Image from "next/image";
 const DestinationItem = ({ city }: any) => {
   return (
     <SDestination>
-      <Link href={`/explore/locations/${city.name.toLowerCase()}`}>
+      <Link href={`/discover/locations/${city.name.toLowerCase()}`}>
         <div className="image">
           <Image src={city.poster} alt="Landmark" width={300} height={300} />
         </div>
