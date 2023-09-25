@@ -9,23 +9,66 @@ export const HeroContainer = styled.div`
 export const SearchTabContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: center;
   flex-direction: column;
-  height: 95vh;
+  height: 100vh;
   object-fit: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   background-image: url(https://images.unsplash.com/photo-1473625247510-8ceb1760943f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2311&q=80);
+  padding-bottom: 7rem;
 
   @media (min-width: 768px) {
     position: block;
     display: flex;
     flex-direction: column;
-    padding-bottom: 7rem;
-    height: 90vh;
-    /* padding-top: 13rem; */
   }
+`;
+
+export const SearchTabOuter = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  @media (min-width: 768px) {
+    width: 80%;
+  }
+`;
+
+export const SearchTab = styled.div`
+  border-radius: 50px;
+  padding: 1rem;
+  background: #006dff59;
+  border: 1px solid rgb(221, 221, 221);
+
+  @media (min-width: 768px) {
+    width: 100%;
+    display: flex;
+  }
+`;
+
+export const SearchInput = styled.input`
+  height: 40px;
+  width: 100%;
+  border-radius: 25px;
+  border: none;
+  margin-bottom: 3px;
+`;
+
+export const SearchButton = styled.button`
+  display: block;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  border: 10px solid #cfdcec;
+  overflow: hidden;
+  box-shadow: 0 0 3px gray;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const HeroText = styled.div`
@@ -39,19 +82,15 @@ export const HeroText = styled.div`
 
 export const SubHeader = styled.div`
   width: 100%;
-  margin: auto 1rem;
   ul {
     list-style-type: none;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     margin: 0;
     padding: 0;
-
-    @media (min-width: 768px) {
-      justify-content: space-evenly;
-    }
-
+    width: 100%;
+    margin-top: 5px;
     li {
       width: 25%;
       display: flex;
@@ -66,28 +105,18 @@ export const SubHeader = styled.div`
       background: #6460568f;
       justify-content: center;
 
-      a {
-        text-decoration: none;
-        color: white;
-      }
-
-      /* @media (min-width: 600px) {
+      @media (min-width: 768px) {
+        width: 20%;
         background: #00000059;
         color: white;
-      } */
-
-      @media (max-width: 768px) {
-        svg {
-          display: none;
-        }
       }
 
       svg {
-        /* width: 15%; */
-        font-size: 1rem;
+        width: 15%;
       }
 
       p {
+        width: 85%;
         margin: 0;
       }
 
@@ -96,6 +125,10 @@ export const SubHeader = styled.div`
         outline: none;
         opacity: 0.8;
         border-radius: 15px;
+      }
+
+      a {
+        text-decoration: none;
       }
     }
   }
