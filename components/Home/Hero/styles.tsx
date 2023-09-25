@@ -17,12 +17,12 @@ export const SearchTabContainer = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   background-image: url(https://images.unsplash.com/photo-1473625247510-8ceb1760943f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2311&q=80);
-  padding-bottom: 7rem;
-
+  padding-bottom: 13rem;
   @media (min-width: 768px) {
     position: block;
     display: flex;
     flex-direction: column;
+    padding-bottom: 7rem;
   }
 `;
 
@@ -85,7 +85,7 @@ export const SubHeader = styled.div`
   ul {
     list-style-type: none;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin: 0;
     padding: 0;
@@ -112,7 +112,11 @@ export const SubHeader = styled.div`
       }
 
       svg {
-        width: 15%;
+        display: none;
+
+        @media (min-width: 768px) {
+          display: block;
+        }
       }
 
       p {
