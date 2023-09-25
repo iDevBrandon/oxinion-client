@@ -1,6 +1,14 @@
 import { useState, useEffect } from "react";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
+import { icon } from "leaflet";
+import oxinionLogo from "../../public/images/oxinion_logo.png";
+
+const Icon = icon({
+  iconUrl: oxinionLogo.src,
+  iconSize: [24, 24],
+  iconAnchor: [12, 24],
+});
 
 export function ChangeView({ coords }: any) {
   const map = useMap();
@@ -20,7 +28,7 @@ export default function Map() {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {geoData.lat && geoData.lng && (
-        <Marker position={[geoData.lat, geoData.lng]} />
+        <Marker position={[geoData.lat, geoData.lng]} icon={Icon} />
       )}
       <ChangeView coords={center} />
     </MapContainer>
