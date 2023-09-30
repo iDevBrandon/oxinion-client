@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { DiscoverContainer, LocationHeader, MapSection } from "./styles";
+import { DiscoverContainer, FeaturedContainer, FeedContainer, LatestFeedContainer, LocationHeader, MapSection } from "./styles";
 import { RiMapPin2Line } from "react-icons/ri";
 import ShowMap from "@/components/Common/ShowMap";
 import { usePathname } from "next/navigation";
@@ -37,22 +37,22 @@ const Discover = () => {
       </div>
 
       <div>
-        <div>
+        <FeaturedContainer>
           <h2>Featured stories</h2>
           <Featured />
-        </div>
-        <div>
+        </FeaturedContainer>
+        <LatestFeedContainer>
           <h2>Latest Feed</h2>
-          <div>
+          <FeedContainer>
             <Post />
             <Post />
             <Post />
             <Post />
             <Post />
             <Post />
-          </div>
+          </FeedContainer>
           Add infinite scrolling
-        </div>
+        </LatestFeedContainer>
       </div>
     </DiscoverContainer>
   );

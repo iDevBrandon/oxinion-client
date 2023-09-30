@@ -39,3 +39,25 @@ export const DiscoverContainer = styled.div``;
 export const MapSection = styled.div`
   width: 100%;
 `;
+
+export const FeaturedContainer = styled.div`
+  @media (min-width: 768px) {
+    padding: 0 10rem;
+  }
+`;
+
+export const LatestFeedContainer = styled.div`
+  @media (min-width: 768px) {
+    padding: 0 10rem;
+  }
+`;
+
+export const FeedContainer = styled.div`
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    align-items: center;
+  }
+`;
