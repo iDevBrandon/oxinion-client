@@ -7,7 +7,7 @@ import ShowMap from "@/components/Common/ShowMap";
 import { usePathname } from "next/navigation";
 import { TrendingItem, TrendingList } from "@/components/Home/Trending/styles";
 import Post from "@/components/Common/Post";
-import Featured from "@/components/Common/Post/Featured";
+import Featured from "@/components/Common/Featured";
 
 const Discover = () => {
   const pathname = usePathname();
@@ -44,14 +44,12 @@ const Discover = () => {
         <div>
           <h2>Latest Feed</h2>
           <div>
-            <TrendingItem>
-              <Post />
-            </TrendingItem>
-            <TrendingItem>Item 2</TrendingItem>
-            <TrendingItem>Item 3</TrendingItem>
-            <TrendingItem>Item 4</TrendingItem>
-            <TrendingItem>Item 5</TrendingItem>
-            <TrendingItem>Item 6</TrendingItem>
+            <Post />
+            <Post />
+            <Post />
+            <Post />
+            <Post />
+            <Post />
           </div>
           Add infinite scrolling
         </div>
