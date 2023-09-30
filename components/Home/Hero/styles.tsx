@@ -12,6 +12,7 @@ export const SearchTabContainer = styled.div`
   justify-content: center;
   flex-direction: column;
   height: 100vh;
+  
   object-fit: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -137,7 +138,7 @@ export const SubHeader = styled.div`
     }
   }
   @media (min-width: 767px) {
-    width: 50%;
+    width: 70%;
     justify-content: space-around;
   }
 
