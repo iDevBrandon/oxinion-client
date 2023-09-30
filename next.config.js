@@ -7,6 +7,11 @@ module.exports = {
     styledComponents: true,
   },
   images: {
-    domains: ["img.freepik.com", "img.cjnews.cj.net", "source.unsplash.com"],
+    domains: [
+      "img.freepik.com",
+      "img.cjnews.cj.net",
+      "source.unsplash.com",
+      "picsum.photos",
+    ],
   },
 };

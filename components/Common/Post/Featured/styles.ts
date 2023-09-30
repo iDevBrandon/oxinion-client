@@ -12,18 +12,21 @@ export const TrendingContainer = styled.div`
   }
 `;
 
-export const TrendingList = styled.div`
+export const FeaturedList = styled.div`
+  width: 90%;
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2px;
 
   @media (min-width: 768px) {
     grid-template-columns: repeat(3, 1fr);
-    max-width: 100%;
   }
 `;
 
-export const TrendingItem = styled.div`
+export const FeaturedItem = styled.div`
   width: 100%;
-  aspect-ratio: 1 / 1;
+  margin-bottom: 3rem;
+
+  @media (min-width: 768px) {
+    /* width: 50%; */
+  }
 `;

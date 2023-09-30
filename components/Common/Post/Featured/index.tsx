@@ -1,16 +1,82 @@
 import React from "react";
-import { TrendingList,TrendingItem } from "./styles";
+import { FeaturedList, FeaturedItem } from "./styles";
+import Image from "next/image";
 
 const Featured = () => {
   return (
-    <TrendingList>
-      <TrendingItem>Item 1</TrendingItem>
-      <TrendingItem>Item 2</TrendingItem>
-      <TrendingItem>Item 3</TrendingItem>
-      <TrendingItem>Item 4</TrendingItem>
-      <TrendingItem>Item 5</TrendingItem>
-      <TrendingItem>Item 6</TrendingItem>
-    </TrendingList>
+    <FeaturedList>
+      <FeaturedItem>
+        <Image
+          src="https://picsum.photos/129"
+          alt="content"
+          width={0}
+          height={0}
+          sizes="100vw"
+          style={{ width: "100%", height: "auto" }}
+          objectFit="cover"
+        />
+      </FeaturedItem>
+
+      <FeaturedItem>
+        <Image
+          src="https://picsum.photos/202"
+          alt="content"
+          width={0}
+          height={0}
+          sizes="100vw"
+          style={{ width: "100%", height: "auto" }}
+          objectFit="cover"
+        />
+      </FeaturedItem>
+
+      <FeaturedItem>
+        <Image
+          src="https://picsum.photos/201"
+          alt="content"
+          width={0}
+          height={0}
+          sizes="100vw"
+          style={{ width: "100%", height: "auto" }}
+          objectFit="cover"
+        />
+      </FeaturedItem>
+
+      <FeaturedItem>
+        <Image
+          src="https://picsum.photos/130"
+          alt="content"
+          width={0}
+          height={0}
+          sizes="100vw"
+          style={{ width: "100%", height: "auto" }}
+          objectFit="cover"
+        />
+      </FeaturedItem>
+
+      <FeaturedItem>
+        <Image
+          src="https://picsum.photos/203"
+          alt="content"
+          width={0}
+          height={0}
+          sizes="100vw"
+          style={{ width: "100%", height: "auto" }}
+          objectFit="cover"
+        />
+      </FeaturedItem>
+
+      <FeaturedItem>
+        <Image
+          src="https://picsum.photos/204"
+          alt="content"
+          width={0}
+          height={0}
+          sizes="100vw"
+          style={{ width: "100%", height: "auto" }}
+          objectFit="cover"
+        />
+      </FeaturedItem>
+    </FeaturedList>
   );
 };
 
