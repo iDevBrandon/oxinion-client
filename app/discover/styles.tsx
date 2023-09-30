@@ -34,10 +34,48 @@ export const LocationHeader = styled.header`
   }
 `;
 
-export const DiscoverContainer = styled.div``;
+export const DiscoverContainer = styled.div`
+  @media (min-width: 768px) {
+    position: relative;
+  }
+`;
+
+export const MainContainer = styled.main`
+  @media (min-width: 768px) {
+    position: relative;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+  }
+`;
+
+export const MainMap = styled.div`
+  order: 2; /* Reversed order for larger screens */
+
+  @media (min-width: 768px) {
+    /* background: red; */
+    height: 100vh;
+    overflow: auto;
+    position: sticky;
+    top: 0;
+  }
+`;
+
+export const MainPosts = styled.div`
+  order: 1; /* Reversed order for larger screens */
+`;
 
 export const MapSection = styled.div`
-  width: 100%;
+  /* width: 100%;
+
+  @media (min-width: 768px) {
+    display: inline-block;
+    position: relative;
+  } */
+`;
+
+export const ContentsContainer = styled.div`
+  @media (min-width: 768px) {
+  }
 `;
 
 export const FeaturedContainer = styled.div`
