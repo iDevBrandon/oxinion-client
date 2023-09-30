@@ -4,13 +4,22 @@ import React from "react";
 import { DiscoverContainer, LocationHeader, MapSection } from "./styles";
 import { RiMapPin2Line } from "react-icons/ri";
 import ShowMap from "@/components/Common/ShowMap";
+import { usePathname } from "next/navigation";
+import { TrendingItem, TrendingList } from "@/components/Home/Trending/styles";
+import Post from "@/components/Common/Post";
 
 const Discover = () => {
+  const pathname = usePathname();
+  console.log(pathname);
   return (
     <DiscoverContainer>
-      <MapSection>
-        <ShowMap />
-      </MapSection>
+      {pathname === "/discover" ? (
+        <div></div>
+      ) : (
+        <MapSection>
+          <ShowMap />
+        </MapSection>
+      )}
 
       <div>
         <LocationHeader>
@@ -24,18 +33,21 @@ const Discover = () => {
             <h3>London, United Kingdom</h3>
           </div>
         </LocationHeader>
-        <div>
-          {/* <div>Thigns to do</div>
-            <div>Restaurants</div>
-            <div>Stays</div>
-            <div>Attractions</div> */}
-          {/* <div>Ride</div> */}
-          {/* <div>Flights</div> */}
-        </div>
       </div>
       <div>
-        <div>Top posts</div>
-        <div>Most Recent</div>
+        <div>
+          <h2>Featured stories</h2>
+          <TrendingList>
+            <TrendingItem>
+              <Post />
+            </TrendingItem>
+            <TrendingItem>Item 2</TrendingItem>
+            <TrendingItem>Item 3</TrendingItem>
+            <TrendingItem>Item 4</TrendingItem>
+            <TrendingItem>Item 5</TrendingItem>
+            <TrendingItem>Item 6</TrendingItem>
+          </TrendingList>
+        </div>
       </div>
     </DiscoverContainer>
   );
