@@ -9,7 +9,9 @@ export const PostWrapper = styled.div`
   }
 
   @media (min-width: 768px) {
-    width: 470px;
+    /* width: 66%; */
+    padding: 0;
+    margin-bottom: 2rem;
   }
 `;
 

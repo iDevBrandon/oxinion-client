@@ -12,7 +12,7 @@ export const SearchTabContainer = styled.div`
   justify-content: center;
   flex-direction: column;
   height: 100vh;
-  
+
   object-fit: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -39,11 +39,12 @@ export const SearchTabOuter = styled.div`
 export const SearchTab = styled.div`
   border-radius: 50px;
   padding: 1rem;
-  background: #006dff59;
+  background: #00123c;
   border: 1px solid rgb(221, 221, 221);
 
   @media (min-width: 768px) {
     width: 100%;
+    padding: 0.5rem;
     display: flex;
   }
 `;
@@ -52,8 +53,34 @@ export const SearchInput = styled.input`
   height: 40px;
   width: 100%;
   border-radius: 25px;
-  border: none;
+  /* border: none; */
   margin-bottom: 3px;
+  border: 2px solid #f9ca48;
+  outline: none;
+  padding: 1rem;
+
+  &:first-child {
+    border-bottom-left-radius: unset;
+  }
+
+  &:last-child {
+    border-top-left-radius: unset;
+  }
+
+  @media (min-width: 768px) {
+    &:first-child {
+      border-radius: 25px;
+      border-top-right-radius: unset;
+      border-bottom-right-radius: unset;
+      margin-right: 2px;
+    }
+
+    &:last-child {
+      border-left: 1px solid #c7c7c7;
+      border-top-left-radius: unset;
+      border-bottom-left-radius: unset;
+    }
+  }
 `;
 
 export const SearchButton = styled.button`
@@ -61,7 +88,7 @@ export const SearchButton = styled.button`
   height: 3rem;
   width: 3rem;
   border-radius: 50%;
-  border: 10px solid #cfdcec;
+  border: 1px solid #cfdcec;
   overflow: hidden;
   box-shadow: 0 0 3px gray;
   position: absolute;
@@ -70,6 +97,7 @@ export const SearchButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  background: aliceblue;
 `;
 
 export const HeroText = styled.div`

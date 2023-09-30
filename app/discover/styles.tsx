@@ -99,3 +99,15 @@ export const FeedContainer = styled.div`
     align-items: center;
   }
 `;
+
+export const MapController = styled.div`
+  width: 100%;
+  display: none;
+  background: grey;
+  @media (min-width: 768px) {
+    
+    order: 2;
+    display: inline-block;
+    position: relative;
+  }
+`;

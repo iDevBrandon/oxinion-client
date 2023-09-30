@@ -12,6 +12,7 @@ import {
   MainContainer,
   MainMap,
   MainPosts,
+  MapController,
 } from "./styles";
 import { RiMapPin2Line } from "react-icons/ri";
 import ShowMap from "@/components/Common/ShowMap";
@@ -41,7 +42,7 @@ const Discover = () => {
         <MainContainer>
           <MainMap>
             {pathname === "discover" ? (
-              <div>control map</div>
+              <MapController>control map</MapController>
             ) : (
               <MapSection>
                 <ShowMap />
