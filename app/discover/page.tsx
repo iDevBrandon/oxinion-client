@@ -20,10 +20,29 @@ import { usePathname } from "next/navigation";
 import { TrendingItem, TrendingList } from "@/components/Home/Trending/styles";
 import Post from "@/components/Common/Post";
 import Featured from "@/components/Common/Featured";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import useMyInfoQuery from "@/hooks/queries/useMyInfoQuery";
+import PostForm from "@/components/Common/PostForm";
+import { loadPostsAPI } from "@/apis/posts";
 
 const Discover = () => {
   const pathname = usePathname();
-  console.log(pathname);
+
+  const { data: me, error } = useMyInfoQuery();
+  const { data } = useInfiniteQuery(
+    ["posts"],
+    ({ pageParam = "" }) => loadPostsAPI(pageParam),
+    {
+      getNextPageParam: (lastPage) => {
+        return lastPage;
+      },
+    }
+  );
+
+  if (!data) return <></>;
+
+  const posts = data?.pages[0].posts;
+
   return (
     <DiscoverContainer>
       <ContentsContainer>
@@ -51,6 +70,7 @@ const Discover = () => {
           </MainMap>
 
           <MainPosts>
+            {me && <PostForm />}
             <FeaturedContainer>
               <h2>Featured stories</h2>
               <Featured />
@@ -58,12 +78,16 @@ const Discover = () => {
             <LatestFeedContainer>
               <h2>Latest Feed</h2>
               <FeedContainer>
+                {posts.map((post: any) => (
+                  <Post key={post.id} post={post} />
+                ))}
+
+                {/* <Post />
                 <Post />
                 <Post />
                 <Post />
                 <Post />
-                <Post />
-                <Post />
+                <Post /> */}
               </FeedContainer>
               Add infinite scrolling
             </LatestFeedContainer>

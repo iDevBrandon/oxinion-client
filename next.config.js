@@ -12,6 +12,7 @@ module.exports = {
       "img.cjnews.cj.net",
       "source.unsplash.com",
       "picsum.photos",
+      "firebasestorage.googleapis.com",
     ],
   },
 };
