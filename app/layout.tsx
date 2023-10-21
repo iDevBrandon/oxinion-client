@@ -9,6 +9,7 @@ import theme from "@/styles/theme";
 import Providers from "./Providers";
 import Footer from "@/components/Footer";
 import { cookies, headers } from "next/headers";
+import GoogleAnalytics from "./GoogleAnalytics";
 // import 'mapbox-gl/dist/mapbox-gl.css';
 
 
@@ -34,6 +35,8 @@ export default function RootLayout({
         <Providers>
           <GlobalStyles />
           <Header />
+          <GoogleAnalytics />
+
           {children}
           <Footer />
         </Providers>
