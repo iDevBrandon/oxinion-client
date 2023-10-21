@@ -24,16 +24,15 @@ import useMyInfoQuery from "@/hooks/queries/useMyInfoQuery";
 import PostForm from "@/components/Common/PostForm";
 import { loadPostsAPI } from "@/apis/posts";
 import MapBox from "@/components/Common/PostForm/MapBox";
-import { usePathname, useRouter,useSearchParams} from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const Discover = () => {
   const pathname = usePathname();
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
 
   const router = useRouter();
-  const location = searchParams.get('location');
-  const term = searchParams.get('term')
-
+  const location = searchParams.get("location");
+  const term = searchParams.get("term");
 
   console.log(location, term);
   const { data: me, error } = useMyInfoQuery();
@@ -62,7 +61,7 @@ const Discover = () => {
           </div>
           <div className="header-text">
             <h4>Looking for {term || "ideas"}</h4>
-            <h3>in {location}</h3>
+            <h3>in {location || "somewhere"}</h3>
           </div>
         </LocationHeader>
 
