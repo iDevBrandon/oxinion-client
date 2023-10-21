@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   HeroContainer,
   SearchButton,
@@ -17,7 +17,19 @@ import { FaHandshakeSimple } from "react-icons/fa6";
 import { FaSearchLocation } from "react-icons/fa";
 import Link from "next/link";
 import { RiPriceTag3Line } from "react-icons/ri";
+import { useRouter } from "next/navigation";
+
 const Hero = () => {
+  const router = useRouter();
+  const [term, setTerm] = useState<string>("");
+  const [location, setLocation] = useState<string>("");
+
+  console.log(term, location);
+
+  const search = () => {
+    router.push(`/discover?term=${term}&location=${location}`);
+  };
+
   return (
     <>
       <HeroContainer />
@@ -32,10 +44,17 @@ const Hero = () => {
                 style={{
                   borderBottom: `1px solid #C7C7C7`,
                 }}
+                value={term}
+                onChange={(e) => setTerm(e.target.value)}
               />
-              <SearchInput type="text" placeholder="London, United Kingdom" />
+              <SearchInput
+                type="text"
+                placeholder="London, United Kingdom"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+              />
             </SearchTab>
-            <SearchButton>
+            <SearchButton onClick={search}>
               <FaSearchLocation />
             </SearchButton>
           </SearchTabOuter>
@@ -66,7 +85,3 @@ const Hero = () => {
 };
 
 export default Hero;
-
-{
-  /*  */
-}

@@ -16,7 +16,6 @@ import {
 } from "./styles";
 import { RiMapPin2Line } from "react-icons/ri";
 import ShowMap from "@/components/Common/ShowMap";
-import { usePathname } from "next/navigation";
 import { TrendingItem, TrendingList } from "@/components/Home/Trending/styles";
 import Post from "@/components/Common/Post";
 import Featured from "@/components/Common/Featured";
@@ -24,10 +23,19 @@ import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import useMyInfoQuery from "@/hooks/queries/useMyInfoQuery";
 import PostForm from "@/components/Common/PostForm";
 import { loadPostsAPI } from "@/apis/posts";
+import MapBox from "@/components/Common/PostForm/MapBox";
+import { usePathname, useRouter,useSearchParams} from "next/navigation";
 
 const Discover = () => {
   const pathname = usePathname();
+  const searchParams = useSearchParams()
 
+  const router = useRouter();
+  const location = searchParams.get('location');
+  const term = searchParams.get('term')
+
+
+  console.log(location, term);
   const { data: me, error } = useMyInfoQuery();
   const { data } = useInfiniteQuery(
     ["posts"],
@@ -53,15 +61,17 @@ const Discover = () => {
             </div>
           </div>
           <div className="header-text">
-            <h4>Browsing in</h4>
-            <h3>London, United Kingdom</h3>
+            <h4>Looking for {term || "ideas"}</h4>
+            <h3>in {location}</h3>
           </div>
         </LocationHeader>
 
         <MainContainer>
           <MainMap>
             {pathname === "discover" ? (
-              <MapController>control map</MapController>
+              <MapController>
+                <MapBox />
+              </MapController>
             ) : (
               <MapSection>
                 <ShowMap />
@@ -81,13 +91,6 @@ const Discover = () => {
                 {posts.map((post: any) => (
                   <Post key={post.id} post={post} />
                 ))}
-
-                {/* <Post />
-                <Post />
-                <Post />
-                <Post />
-                <Post />
-                <Post /> */}
               </FeedContainer>
               Add infinite scrolling
             </LatestFeedContainer>

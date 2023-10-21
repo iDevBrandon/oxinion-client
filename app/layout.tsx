@@ -9,6 +9,8 @@ import theme from "@/styles/theme";
 import Providers from "./Providers";
 import Footer from "@/components/Footer";
 import { cookies, headers } from "next/headers";
+// import 'mapbox-gl/dist/mapbox-gl.css';
+
 
 const inter = Inter({ subsets: ["latin"] });
 
