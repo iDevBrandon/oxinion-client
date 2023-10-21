@@ -1,17 +1,14 @@
 import styled from "styled-components";
 
 export const PostWrapper = styled.div`
-  padding: 1rem;
-
   img {
     object-fit: cover;
     width: 100%;
   }
 
   @media (min-width: 768px) {
-    /* width: 66%; */
-    padding: 0;
-    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: 60% 40%;
   }
 `;
 
@@ -21,33 +18,42 @@ export const PostImage = styled.div`
     object-fit: cover;
     width: 100%;
   }
+  @media (min-width: 768px) {
+    /* width: 66%; */
+  }
 `;
 
 export const PostDetails = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 1rem;
-  border: 1px solid black;
+  padding-top: 1rem;
+  @media (min-width: 768px) {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 `;
 
 export const ProfileWrapper = styled.div`
   display: flex;
+  align-items: center;
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
 
   div {
     margin-left: 0.5rem;
-    display: flex;
     flex-direction: column;
-  }
-`;
-
-export const ProfileImage = styled.div`
-  width: 50px;
-  img {
-    border-radius: 50%;
   }
 `;
 
 export const PostProp = styled.div`
   display: flex;
+  justify-content: space-between;
   margin: 0 0.5rem;
 `;
+
+export const PostCommentWrapper = styled.div``;
+
+export const CommentWrapper = styled.div``;

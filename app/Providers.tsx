@@ -10,7 +10,7 @@ import { store } from "@/store/store";
 
 const Providers = (props: React.PropsWithChildren) => {
   const queryClient = new QueryClient();
-
+ 
   return (
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>

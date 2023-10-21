@@ -1,67 +1,65 @@
-"use client";
-
-import Image from "next/image";
 import React from "react";
 import { HiOutlineHeart } from "react-icons/hi";
 import { MdOutlineMoreHoriz } from "react-icons/md";
 import {
-  PostDetails,
-  PostImage,
-  PostProp,
   PostWrapper,
+  PostImage,
+  PostDetails,
   ProfileWrapper,
-  ProfileImage,
+  PostProp,
+  CommentWrapper,
+  PostCommentWrapper,
 } from "./styles";
 
-const index = ({ post }: any) => {
-  console.log(post);
+const Post = ({ post }: any) => {
   return (
     <PostWrapper>
-      <ProfileWrapper>
-        <ProfileImage>
-          <Image
-            src="https://picsum.photos/204"
-            alt="profile"
-            width={0}
-            height={0}
-            sizes="100vw"
-            style={{ width: "100%", height: "auto" }}
-            objectFit="cover"
-          />
-        </ProfileImage>
-
-        <div>
-          <b>iDevBrandon</b>
-          <small>1hr ago</small>
-        </div>
-      </ProfileWrapper>
-
       <PostImage>
-        <Image
-          src={post.images[0]}
-          alt="content"
-          width={0}
-          height={0}
-          sizes="100vw"
-          style={{ width: "100%", height: "auto" }}
-          objectFit="cover"
-        />
+        <img src="https://picsum.photos/199" alt="post" />
       </PostImage>
-
       <PostDetails>
         <PostProp>
-          <div>472 likes</div>
-          <div style={{ margin: "0 0.5rem" }}>
-            <HiOutlineHeart />
+          <ProfileWrapper>
+            <img src="https://picsum.photos/201" alt="profile" />
+            <div>
+              <b>iDevBrandon</b>
+            </div>
+          </ProfileWrapper>
+          <div className="right" style={{ display: "flex" }}>
+            <div>472 likes</div>
+            <div style={{ margin: "0 0.5rem" }}>
+              <HiOutlineHeart />
+            </div>
+            <div>
+              <MdOutlineMoreHoriz />
+            </div>
           </div>
-          <div>
-            <MdOutlineMoreHoriz />
-          </div>
-          <div>{post.description}</div>
         </PostProp>
+        <div className="PostDesc">This is the first post</div>
+
+        <PostCommentWrapper>
+          <CommentWrapper>
+            <div>
+              <span>
+                <strong>devlife</strong>Comment 1
+              </span>
+            </div>
+            <div>
+              <span>
+                <strong>devlife</strong>Comment 1
+              </span>
+            </div>
+            <div>
+              <span>
+                <strong>devlife</strong>Comment 1
+              </span>
+            </div>
+          </CommentWrapper>
+          <div>Comment form</div>
+        </PostCommentWrapper>
       </PostDetails>
     </PostWrapper>
   );
 };
 
-export default index;
+export default Post;

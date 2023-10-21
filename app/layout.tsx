@@ -8,6 +8,7 @@ import { ThemeProvider } from "styled-components";
 import theme from "@/styles/theme";
 import Providers from "./Providers";
 import Footer from "@/components/Footer";
+import { cookies, headers } from "next/headers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const header = headers();
   return (
     <html lang="en">
       <body className={inter.className}>
