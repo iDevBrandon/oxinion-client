@@ -7,8 +7,8 @@ const MapBox = ({ userlocation }: any) => {
   const [loaded, setLoaded] = useState(false);
 
   const [viewState, setViewState] = useState({
-    longitude: userlocation.coordinates.lng,
-    latitude: userlocation.coordinates.lat,
+    longitude: userlocation?.coordinates?.lng || -0.1278 ,
+    latitude: userlocation?.coordinates?.lat || 51.5074,
     zoom: 12,
   });
 
