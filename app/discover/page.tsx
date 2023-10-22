@@ -25,17 +25,22 @@ import PostForm from "@/components/Common/PostForm";
 import { loadPostsAPI } from "@/apis/posts";
 import MapBox from "@/components/Common/PostForm/MapBox";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import useGeoLocation from "@/hooks/useGeoLocation";
 
 const Discover = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
+  const userlocation = useGeoLocation();
+
   const router = useRouter();
   const location = searchParams.get("location");
   const term = searchParams.get("term");
 
-  console.log(location, term);
+  // console.log(location, term);
+  console.log(userlocation);
   const { data: me, error } = useMyInfoQuery();
+
   const { data } = useInfiniteQuery(
     ["posts"],
     ({ pageParam = "" }) => loadPostsAPI(pageParam),
@@ -66,15 +71,25 @@ const Discover = () => {
         </LocationHeader>
 
         <MainContainer>
-          <MainMap>
-            {pathname === "discover" ? (
+          {/* <MainMap>
+            {pathname === "/discover" ? (
               <MapController>
-                <MapBox />
+                <MapBox userlocation={userlocation} />
               </MapController>
             ) : (
               <MapSection>
                 <ShowMap />
               </MapSection>
+            )}
+          </MainMap> */}
+
+          <MainMap>
+            {userlocation.loaded ? (
+              <MapController>
+                <MapBox userlocation={userlocation} />
+              </MapController>
+            ) : (
+              <p>Loading map...</p>
             )}
           </MainMap>
 
