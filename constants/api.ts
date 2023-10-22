@@ -1,4 +1,4 @@
 export const backUrl =
   process.env.NODE_ENV === "production"
-    ? "https://oxinion.cyclic.app/api"
-    : "http://localhost:8800/api";
+    ? "https://api.oxinion.com"
+    : "http://localhost:8800";
