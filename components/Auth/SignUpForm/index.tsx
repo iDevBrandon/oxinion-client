@@ -9,7 +9,7 @@ import React, {
 } from "react";
 import Link from "next/link";
 import { useMutation } from "@tanstack/react-query";
-import { signUpAPI } from "@/apis/auth";
+import { registerAPI } from "@/apis/auth";
 import { useRouter } from "next/navigation";
 import { AuthFormContainer, CompleteButton, ErrorMessage } from "./styles";
 import useInput from "@/hooks/useInput";
@@ -17,7 +17,7 @@ import useInput from "@/hooks/useInput";
 const SignUpForm = () => {
   const router = useRouter();
 
-  const { mutate, isLoading } = useMutation(signUpAPI, {
+  const { mutate, isLoading } = useMutation(registerAPI, {
     onSuccess: () => {
       router.push("/");
     },

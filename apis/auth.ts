@@ -1,11 +1,11 @@
 import { AxiosRequestConfig } from "axios";
 import { api } from "./axios";
 
-export function loadMyInfoAPI(options: AxiosRequestConfig) {
+export function loadUsersAPI(options: AxiosRequestConfig) {
   return api.get("/users", options).then((response) => response.data);
 }
 
-export function signUpAPI(data: {
+export function registerAPI(data: {
   email: string;
   username: string;
   password: string;
