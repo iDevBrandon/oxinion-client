@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ExtraMenu,
   HeaderGroup,
@@ -16,9 +16,14 @@ import Image from "next/image";
 import logo from "../../public/images/oxinion_logo.png";
 import { FaUserAstronaut } from "react-icons/fa6";
 import { HiOutlineDotsVertical } from "react-icons/hi";
+import useMyInfoQuery from "@/hooks/queries/useMyInfoQuery";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router = useRouter();
+
+  const { data: me } = useMyInfoQuery();
+
   return (
     <HeaderGroup>
       <HeaderNav>
@@ -29,19 +34,25 @@ const Header = () => {
         </Link>
 
         <SubNav>
-          {isLoggedIn ? (
-            <UploadButton>Upload</UploadButton>
+          {!(me && me.id) ? (
+            <>
+              <UploadButton>Upload</UploadButton>
+              <Link href="/profile">
+                <UserIcon>
+                  <FaUserAstronaut />
+                </UserIcon>
+              </Link>
+            </>
           ) : (
-            <LoginButton>
-              <Link href="/signup">Sign Up</Link>
-            </LoginButton>
+            <>
+              <LoginButton >
+                <Link href="/signup">Sign Up</Link>
+              </LoginButton>
+              <LoginButton primary>
+                <Link href="/login">Log In</Link>
+              </LoginButton>
+            </>
           )}
-
-          <Link href="/profile">
-            <UserIcon>
-              <FaUserAstronaut />
-            </UserIcon>
-          </Link>
 
           <ExtraMenu>
             <HiOutlineDotsVertical />

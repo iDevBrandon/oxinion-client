@@ -71,18 +71,6 @@ const Discover = () => {
         </LocationHeader>
 
         <MainContainer>
-          {/* <MainMap>
-            {pathname === "/discover" ? (
-              <MapController>
-                <MapBox userlocation={userlocation} />
-              </MapController>
-            ) : (
-              <MapSection>
-                <ShowMap />
-              </MapSection>
-            )}
-          </MainMap> */}
-
           <MainMap>
             {userlocation.loaded ? (
               <MapController>

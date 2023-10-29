@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import React, { useCallback, useState } from "react";
-import { AuthFormContainer } from "./styles";
-import { useRouter } from "next/navigation";
+ import { useRouter } from "next/navigation";
+import { AuthFormContainer } from "@/components/Auth/SignUpForm/styles";
 
 const Login = () => {
   const router = useRouter();
@@ -19,11 +19,11 @@ const Login = () => {
   }, []);
 
   const onSubmit = useCallback(
-    (e:any) => {
+    (e: any) => {
       e.preventDefault();
 
       console.log(email, password);
-      router.push('/')
+      router.push("/");
     },
     [email, password]
   );
@@ -37,7 +37,7 @@ const Login = () => {
         <div>
           <label htmlFor="email">Email</label>
           <br />
-          <input name="email" value={email} onChange={onChangeEmail} />
+          <input name="email" value={email} onChange={onChangeEmail} required />
         </div>
         <div>
           <label htmlFor="password">Password</label>

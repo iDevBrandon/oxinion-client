@@ -5,6 +5,10 @@ interface IStyle {
   page?: any;
 }
 
+interface LoginButtonProps {
+  primary?: boolean; // Define your prop types here
+}
+
 export const DefaultButton = styled.button<IStyle>`
   color: #ffffff;
   color: ${(props: any) => (props.varient === "primary" ? "fffff" : "#05164d")};
@@ -142,6 +146,7 @@ export const UserIcon = styled.div`
   margin-left: 1rem;
   font-size: 1.5rem;
   cursor: pointer;
+  color: black;
 `;
 
 export const ExtraMenu = styled.button`
@@ -158,13 +163,13 @@ export const ExtraMenu = styled.button`
   }
 `;
 
-export const LoginButton = styled.button`
+export const LoginButton = styled.button<LoginButtonProps>`
   a {
     border: 2px solid #002663;
     display: block;
     border-radius: 4px;
-    color: white;
-    background-color: #002663;
+    color: ${(props) => (props.primary ? "white" : "black")};
+    background-color: ${(props) => (props.primary ? "#002663" : "white")};
     min-height: 36px;
     padding: 6px 8px;
     font-weight: 700;
@@ -173,6 +178,7 @@ export const LoginButton = styled.button`
     border-radius: 30px;
     text-decoration: none;
   }
+
   @media (min-width: 768px) {
   }
 `;
