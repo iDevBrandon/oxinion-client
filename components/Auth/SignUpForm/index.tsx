@@ -1,11 +1,18 @@
 "use client";
 
-import React, { FormEvent, useCallback, useState } from "react";
+import React, {
+  ChangeEvent,
+  FormEvent,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import Link from "next/link";
 import { useMutation } from "@tanstack/react-query";
 import { signUpAPI } from "@/apis/auth";
 import { useRouter } from "next/navigation";
-import { AuthFormContainer } from "./styles";
+import { AuthFormContainer, CompleteButton, ErrorMessage } from "./styles";
+import useInput from "@/hooks/useInput";
 
 const SignUpForm = () => {
   const router = useRouter();
@@ -19,31 +26,27 @@ const SignUpForm = () => {
     },
   });
 
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [username, onChangeUsername] = useInput<string>("");
+  const [email, onChangeEmail] = useInput<string>("");
+  const [password, onChangePassword] = useInput<string>("");
+  const [passwordCheck, handlePasswordCheck] = useInput("");
+  const [term, setTerm] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+  const [termError, setTermError] = useState(false);
 
-  const onChangeUsername = useCallback((e: any) => {
-    setUsername(e.target.value);
-  }, []);
+  useEffect(() => {
+    setPasswordError(password !== passwordCheck);
+  }, [password, passwordCheck, setPasswordError]);
 
-  const onChangeEmail = useCallback((e: any) => {
-    setEmail(e.target.value);
-  }, []);
-
-  const onChangePassword = useCallback((e: any) => {
-    setPassword(e.target.value);
-  }, []);
-
-  const onChangeConfirmPassword = useCallback((e: any) => {
-    setConfirmPassword(e.target.value);
+  const handleTerm = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    setTerm(e.target.checked);
+    setTermError(false);
   }, []);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (password !== confirmPassword) {
+    if (password !== passwordCheck) {
       alert("Passwords do not match");
       return;
     }
@@ -62,12 +65,17 @@ const SignUpForm = () => {
         <div>
           <label htmlFor="username">Username</label>
           <br />
-          <input name="username" value={username} onChange={onChangeUsername} />
+          <input
+            name="username"
+            value={username}
+            onChange={onChangeUsername}
+            required
+          />
         </div>
         <div>
           <label htmlFor="email">Email</label>
           <br />
-          <input name="email" value={email} onChange={onChangeEmail} />
+          <input name="email" value={email} onChange={onChangeEmail} required />
         </div>
         <div>
           <label htmlFor="password">Password</label>
@@ -86,13 +94,25 @@ const SignUpForm = () => {
           <input
             type="password"
             name="confirmPassword"
-            value={confirmPassword}
-            onChange={onChangeConfirmPassword}
+            value={passwordCheck}
+            onChange={handlePasswordCheck}
             required
           />
         </div>
         <div>
-          <button type="submit">Complete to login</button>
+          <input
+            type="checkbox"
+            name="user-term"
+            checked={term}
+            onChange={handleTerm}
+          />
+          Click to Agree terms and conditions
+        </div>
+
+        {passwordError && <ErrorMessage>Password does not match</ErrorMessage>}
+
+        <div>
+          <CompleteButton type="submit">Complete to login</CompleteButton>
         </div>
       </form>
       <div>

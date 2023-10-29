@@ -1,3 +1,4 @@
+import theme from "@/styles/theme";
 import styled from "styled-components";
 
 export const AuthFormContainer = styled.div`
@@ -17,4 +18,25 @@ export const AuthFormContainer = styled.div`
     justify-content: center;
     margin: 8rem auto;
   }
+`;
+
+export const ErrorMessage = styled.div`
+  color: red;
+`;
+
+export const CompleteButton = styled.button`
+  cursor: pointer;
+  height: 44px;
+  width: 100%;
+  background-color: ${theme.colors.black};
+  color: rgb(255, 255, 255);
+  border-radius: 4px;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+
+a > button {
+  text-decoration-line: none;
+
+}
 `;

@@ -34,7 +34,7 @@ const Header = () => {
         </Link>
 
         <SubNav>
-          {!(me && me.id) ? (
+          {me && me.id ? (
             <>
               <UploadButton>Upload</UploadButton>
               <Link href="/profile">
@@ -45,10 +45,10 @@ const Header = () => {
             </>
           ) : (
             <>
-              <LoginButton >
+              <LoginButton>
                 <Link href="/signup">Sign Up</Link>
               </LoginButton>
-              <LoginButton primary>
+              <LoginButton primary={true}>
                 <Link href="/login">Log In</Link>
               </LoginButton>
             </>

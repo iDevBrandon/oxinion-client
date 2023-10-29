@@ -2,8 +2,11 @@
 
 import Link from "next/link";
 import React, { useCallback, useState } from "react";
- import { useRouter } from "next/navigation";
-import { AuthFormContainer } from "@/components/Auth/SignUpForm/styles";
+import { useRouter } from "next/navigation";
+import {
+  AuthFormContainer,
+  CompleteButton,
+} from "@/components/Auth/SignUpForm/styles";
 
 const Login = () => {
   const router = useRouter();
@@ -51,13 +54,10 @@ const Login = () => {
           />
         </div>
         <div>
-          <button>Log in</button>
+          <CompleteButton>Log in</CompleteButton>
         </div>
         <div>
-          <Link href="/signup">
-            Need an account?
-            <button>Sign Up</button>
-          </Link>
+          <Link href="/signup">Need an account?</Link>
         </div>
       </form>
     </AuthFormContainer>
