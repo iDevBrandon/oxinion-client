@@ -4,7 +4,7 @@ const nextConfig = {
     return [
       {
         source: "/api/:path*",
-        destination: `https://api.oxinion.com/:path*`,
+        destination: "https://api.oxinion.com/:path*",
       },
       {
         source: "/api/:path*",
@@ -13,6 +13,10 @@ const nextConfig = {
       {
         source: "/api/:path*",
         destination: "https://random-data-api.com/api/v2/addresses",
+      },
+      {
+        source: "/api/:path*",
+        destination: "http://localhost:8800/:path*",
       },
     ];
   },

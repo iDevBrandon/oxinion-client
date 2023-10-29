@@ -8,14 +8,14 @@ import {
   CompleteButton,
 } from "@/components/Auth/SignUpForm/styles";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { SignInAPI } from "@/apis/auth";
+import { signInAPI } from "@/apis/auth";
 
 const Login = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { mutate, isLoading } = useMutation(SignInAPI, {
+  const { mutate, isLoading } = useMutation(signInAPI, {
     onSuccess: () => {
       queryClient.refetchQueries(["user"]);
     },
