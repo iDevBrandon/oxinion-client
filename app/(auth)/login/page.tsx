@@ -7,11 +7,22 @@ import {
   AuthFormContainer,
   CompleteButton,
 } from "@/components/Auth/SignUpForm/styles";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { SignInAPI } from "@/apis/auth";
 
 const Login = () => {
+  const queryClient = useQueryClient();
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { mutate, isLoading } = useMutation(SignInAPI, {
+    onSuccess: () => {
+      queryClient.refetchQueries(["user"]);
+    },
+    onError: (error: any) => {
+      alert(error.response.data);
+    },
+  });
 
   const onChangeEmail = useCallback((e: any) => {
     setEmail(e.target.value);

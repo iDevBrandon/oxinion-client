@@ -12,3 +12,7 @@ export function signUpAPI(data: {
 }) {
   return api.post("/auth/register", data).then((response) => response.data);
 }
+
+export function SignInAPI(data: { email: string; password: string }) {
+  return api.post("/auth/login").then((response) => response.data);
+}
