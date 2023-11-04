@@ -20,11 +20,20 @@ import { useRouter } from "next/navigation";
 import { loadMyInfoAPI } from "@/apis/auth";
 import useMyInfoQuery from "@/hooks/queries/useMyInfoQuery";
 import Dropdown from "../Common/Dropdown";
+import PostForm from "../Common/PostForm";
 
 const Header = ({ me }: any) => {
   const router = useRouter();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { data: user, error } = useMyInfoQuery();
+  const [uploadModalOpen, setUploadModalOpen] = useState(false);
+  const uploadHandler = (e: any) => {
+    setUploadModalOpen(true);
+  };
+
+  const handleClose = () => {
+    setUploadModalOpen(false);
+  };
 
   return (
     <HeaderGroup>
@@ -38,14 +47,13 @@ const Header = ({ me }: any) => {
         <SubNav>
           {user ? (
             <>
-              <UploadButton>Upload</UploadButton>
-                 <UserIcon>
-                  <FaUserAstronaut
-                    onClick={() => setDropdownOpen(!dropdownOpen)}
-                  />
-                  {dropdownOpen && <Dropdown />}
-                </UserIcon>
-               
+              <UploadButton onClick={uploadHandler}>Upload</UploadButton>
+              <UserIcon>
+                <FaUserAstronaut
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
+                />
+                {dropdownOpen && <Dropdown />}
+              </UserIcon>
             </>
           ) : (
             <>
@@ -64,6 +72,9 @@ const Header = ({ me }: any) => {
           {/* <FaUser /> */}
         </SubNav>
       </HeaderNav>
+      {uploadModalOpen && (
+        <PostForm open={uploadModalOpen} handleClose={handleClose} />
+      )}
     </HeaderGroup>
   );
 };

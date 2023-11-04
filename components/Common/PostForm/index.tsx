@@ -3,22 +3,41 @@
 // 2. add images
 // 3. add details
 
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  Step,
+  StepLabel,
+} from "@mui/material";
 import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 
-const PostForm = () => {
+const PostForm = ({ open, handleClose }: any) => {
   const onSubmit = useCallback((e: any) => {
     e.preventDefault();
 
     console.log("submitted post");
   }, []);
 
+  const label = ["Location", "Images", "Details"];
+
   return (
-    <form onSubmit={onSubmit}>
-      <input type="file" multiple hidden />
-      <input type="text" placeholder="desc" />
-      <button type="submit">Upload</button>
-    </form>
+    <div>
+      <Dialog
+        onClose={handleClose}
+        open={open}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <Step>
+          <StepLabel>{label}</StepLabel>
+        </Step>
+
+        <DialogTitle id="alert-dialog-title">Create a post</DialogTitle>
+        <DialogContent>multi step form here</DialogContent>
+      </Dialog>
+    </div>
   );
 };
 
