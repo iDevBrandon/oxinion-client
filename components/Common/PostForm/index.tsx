@@ -5,6 +5,7 @@
 
 import {
   Box,
+  Button,
   Dialog,
   DialogContent,
   DialogTitle,
@@ -12,10 +13,14 @@ import {
   StepLabel,
   Stepper,
 } from "@mui/material";
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
+import LocationForm from "./LocationForm";
+import ImagesForm from "./ImagesForm";
+import DetailsForm from "./DetailsForm";
 
 const PostForm = ({ open, handleClose }: any) => {
+  const [page, setPage] = useState(0);
   const onSubmit = useCallback((e: any) => {
     e.preventDefault();
 
@@ -23,6 +28,15 @@ const PostForm = ({ open, handleClose }: any) => {
   }, []);
 
   const steps = ["Location", "Images", "Details"];
+  const PageDisplay = () => {
+    if (page === 0) {
+      return <LocationForm />;
+    } else if (page === 1) {
+      return <ImagesForm />;
+    } else {
+      return <DetailsForm />;
+    }
+  };
   return (
     <div>
       <Dialog
@@ -40,7 +54,7 @@ const PostForm = ({ open, handleClose }: any) => {
         aria-describedby="alert-dialog-description"
       >
         <Box sx={{ width: "100%" }}>
-          <Stepper activeStep={0} alternativeLabel>
+          <Stepper activeStep={page} alternativeLabel>
             {steps.map((label) => (
               <Step key={label}>
                 <StepLabel>{label}</StepLabel>
@@ -49,8 +63,27 @@ const PostForm = ({ open, handleClose }: any) => {
           </Stepper>
         </Box>
 
-        <DialogTitle id="alert-dialog-title">Create a post</DialogTitle>
-        <DialogContent>multi step form here</DialogContent>
+        <div className="body" style={{ padding: "1rem" }}>
+          {PageDisplay()}
+        </div>
+        <div className="footer">
+          <Button
+            onClick={() => setPage(page - 1)}
+            variant="contained"
+            sx={{ mt: 3, ml: 1 }}
+            color="primary"
+          >
+            Back
+          </Button>
+          <Button
+            onClick={() => setPage(page + 1)}
+            variant="contained"
+            sx={{ mt: 3, ml: 1 }}
+            color="primary"
+          >
+            Next
+          </Button>
+        </div>
       </Dialog>
     </div>
   );
