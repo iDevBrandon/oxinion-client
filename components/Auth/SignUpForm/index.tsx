@@ -22,7 +22,7 @@ const SignUpForm = () => {
       router.push("/");
     },
     onError: (error: any) => {
-      alert(error.response.data);
+      alert(error.response?.data);
     },
   });
 

@@ -32,14 +32,14 @@ const Discover = () => {
   const searchParams = useSearchParams();
 
   const userlocation = useGeoLocation();
-
   const router = useRouter();
+
   const location = searchParams.get("location");
   const term = searchParams.get("term");
 
   // console.log(location, term);
   console.log(userlocation);
-  const { data: me, error } = useMyInfoQuery();
+  // const { data: me, error } = useMyInfoQuery("");
 
   const { data } = useInfiniteQuery(
     ["posts"],
@@ -82,7 +82,7 @@ const Discover = () => {
           </MainMap>
 
           <MainPosts>
-            {me && <PostForm />}
+            {<PostForm />}
             <FeaturedContainer>
               <h2>Featured stories</h2>
               <Featured />

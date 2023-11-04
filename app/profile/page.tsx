@@ -2,11 +2,21 @@
 import React from "react";
 import { ProfileCard } from "./styles";
 import Image from "next/image";
+import useMyInfoQuery from "@/hooks/queries/useMyInfoQuery";
 
 const ProfilePage = () => {
+  const { data: me } = useMyInfoQuery();
+
+  // console.log(me);
+
   return (
     <div>
-      <Image src="https://picsum.photos/200" alt="profile" width='200' height='200' />
+      <Image
+        src="https://picsum.photos/200"
+        alt="profile"
+        width="200"
+        height="200"
+      />
       <h2>iDevBrandon</h2>
 
       <ProfileCard>

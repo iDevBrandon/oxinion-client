@@ -16,13 +16,14 @@ import Image from "next/image";
 import logo from "../../public/images/oxinion_logo.png";
 import { FaUserAstronaut } from "react-icons/fa6";
 import { HiOutlineDotsVertical } from "react-icons/hi";
-import useMyInfoQuery from "@/hooks/queries/useMyInfoQuery";
 import { useRouter } from "next/navigation";
+import { loadMyInfoAPI } from "@/apis/auth";
+import useMyInfoQuery from "@/hooks/queries/useMyInfoQuery";
 
-const Header = () => {
+const Header = ({ me }: any) => {
   const router = useRouter();
 
-  const { data: me } = useMyInfoQuery();
+  const { data: user, error } = useMyInfoQuery();
 
   return (
     <HeaderGroup>
@@ -34,7 +35,7 @@ const Header = () => {
         </Link>
 
         <SubNav>
-          {me && me.id ? (
+          {user ? (
             <>
               <UploadButton>Upload</UploadButton>
               <Link href="/profile">
@@ -48,7 +49,7 @@ const Header = () => {
               <LoginButton>
                 <Link href="/signup">Sign Up</Link>
               </LoginButton>
-              <LoginButton primary={true}>
+              <LoginButton>
                 <Link href="/login">Log In</Link>
               </LoginButton>
             </>

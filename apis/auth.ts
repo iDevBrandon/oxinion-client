@@ -1,10 +1,6 @@
 import { AxiosRequestConfig } from "axios";
 import { api } from "./axios";
 
-export function loadUsersAPI(options: AxiosRequestConfig) {
-  return api.get("/users", options).then((response) => response.data);
-}
-
 export function registerAPI(data: {
   email: string;
   username: string;
@@ -14,5 +10,9 @@ export function registerAPI(data: {
 }
 
 export function signInAPI(data: { email: string; password: string }) {
-  return api.post("/auth/login").then((response) => response.data);
+  return api.post("/auth/login", data).then((response) => response.data);
+}
+
+export function loadMyInfoAPI() {
+  return api.get("/users").then((response) => response.data);
 }

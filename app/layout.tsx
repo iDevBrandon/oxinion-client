@@ -12,7 +12,6 @@ import { cookies, headers } from "next/headers";
 import GoogleAnalytics from "./GoogleAnalytics";
 // import 'mapbox-gl/dist/mapbox-gl.css';
 
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -21,12 +20,24 @@ export const metadata: Metadata = {
   icons: "favicon.ico",
 };
 
-export default function RootLayout({
+async function getUserInfo() {
+  const header = headers();
+  const Cookie = header.get("Cookie"); // Capital??
+  const res = await fetch("http://localhost:8800/api/users", {
+    headers: Cookie ? { Cookie } : undefined,
+  });
+  return res.json();
+}
+
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const header = headers();
+  const me = await getUserInfo();
+
+  console.log(me);
+  
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -34,7 +45,7 @@ export default function RootLayout({
 
         <Providers>
           <GlobalStyles />
-          <Header />
+          <Header me={me} />
           <GoogleAnalytics />
 
           {children}
