@@ -14,5 +14,5 @@ export function signInAPI(data: { email: string; password: string }) {
 }
 
 export function loadMyInfoAPI(options?: AxiosRequestConfig) {
-  return api.get("/user", options).then((response) => response.data);
+  return api.get("/users", options).then((response) => response.data);
 }
