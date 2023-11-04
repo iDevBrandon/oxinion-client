@@ -7,8 +7,6 @@ import useMyInfoQuery from "@/hooks/queries/useMyInfoQuery";
 const ProfilePage = () => {
   const { data: me } = useMyInfoQuery();
 
-  // console.log(me);
-
   return (
     <div>
       <Image

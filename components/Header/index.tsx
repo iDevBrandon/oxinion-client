@@ -19,10 +19,11 @@ import { HiOutlineDotsVertical } from "react-icons/hi";
 import { useRouter } from "next/navigation";
 import { loadMyInfoAPI } from "@/apis/auth";
 import useMyInfoQuery from "@/hooks/queries/useMyInfoQuery";
+import Dropdown from "../Common/Dropdown";
 
 const Header = ({ me }: any) => {
   const router = useRouter();
-
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const { data: user, error } = useMyInfoQuery();
 
   return (
@@ -40,7 +41,10 @@ const Header = ({ me }: any) => {
               <UploadButton>Upload</UploadButton>
               <Link href="/profile">
                 <UserIcon>
-                  <FaUserAstronaut />
+                  <FaUserAstronaut
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                  />
+                  {dropdownOpen && <Dropdown />}
                 </UserIcon>
               </Link>
             </>

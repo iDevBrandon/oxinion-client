@@ -57,71 +57,80 @@ const SignUpForm = () => {
   };
 
   return (
-    <AuthFormContainer>
-      <div>
-        <h1>Sign up for OXINION</h1>
-      </div>
-      <form onSubmit={handleSubmit}>
+    <div>
+      <AuthFormContainer>
         <div>
-          <label htmlFor="username">Username</label>
-          <br />
-          <input
-            name="username"
-            value={username}
-            onChange={onChangeUsername}
-            required
-          />
+          <h1>Sign up for OXINION</h1>
         </div>
-        <div>
-          <label htmlFor="email">Email</label>
-          <br />
-          <input name="email" value={email} onChange={onChangeEmail} required />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <br />
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={onChangePassword}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="confirmPassword">Confirm Password</label>
-          <br />
-          <input
-            type="password"
-            name="confirmPassword"
-            value={passwordCheck}
-            onChange={handlePasswordCheck}
-            required
-          />
-        </div>
-        <div>
-          <input
-            type="checkbox"
-            name="user-term"
-            checked={term}
-            onChange={handleTerm}
-          />
-          Click to Agree terms and conditions
-        </div>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="username">Username</label>
+            <br />
+            <input
+              name="username"
+              value={username}
+              onChange={onChangeUsername}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="email">Email</label>
+            <br />
+            <input
+              name="email"
+              value={email}
+              onChange={onChangeEmail}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="password">Password</label>
+            <br />
+            <input
+              type="password"
+              name="password"
+              value={password}
+              onChange={onChangePassword}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="confirmPassword">Confirm Password</label>
+            <br />
+            <input
+              type="password"
+              name="confirmPassword"
+              value={passwordCheck}
+              onChange={handlePasswordCheck}
+              required
+            />
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              name="user-term"
+              checked={term}
+              onChange={handleTerm}
+            />
+            Click to Agree terms and conditions
+          </div>
 
-        {passwordError && <ErrorMessage>Password does not match</ErrorMessage>}
+          {passwordError && (
+            <ErrorMessage>Password does not match</ErrorMessage>
+          )}
 
+          <div>
+            <CompleteButton type="submit">Complete to login</CompleteButton>
+          </div>
+        </form>
         <div>
-          <CompleteButton type="submit">Complete to login</CompleteButton>
+          <Link href="/login">
+            Already have an account?
+            <button>Sign In</button>
+          </Link>
         </div>
-      </form>
-      <div>
-        <Link href="/login">
-          Already have an account?
-          <button>Sign In</button>
-        </Link>
-      </div>
-    </AuthFormContainer>
+      </AuthFormContainer>
+    </div>
   );
 };
 

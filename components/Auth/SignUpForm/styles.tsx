@@ -2,13 +2,11 @@ import theme from "@/styles/theme";
 import styled from "styled-components";
 
 export const AuthFormContainer = styled.div`
-  padding: 48px 40px 36px;
   border: 1px solid #d9dce0;
-
+  margin: 0 auto;
   border-radius: 5px;
   height: 50vh;
-  margin: 2rem;
-
+  padding: 2rem;
   @media (min-width: 768px) {
     max-width: 450px;
     max-width: 450px;
@@ -17,6 +15,8 @@ export const AuthFormContainer = styled.div`
     align-items: center;
     justify-content: center;
     margin: 8rem auto;
+    display: block;
+    padding: 2rem;
   }
 `;
 
@@ -35,8 +35,7 @@ export const CompleteButton = styled.button`
   text-align: center;
   text-decoration: none;
 
-a > button {
-  text-decoration-line: none;
-
-}
+  a > button {
+    text-decoration-line: none;
+  }
 `;

@@ -48,7 +48,7 @@ const LoginForm = () => {
   useEffect(() => {
     if (me && me._id) {
       router.replace("/");
-     }
+    }
   }, [me && me._id]);
 
   return (
@@ -74,7 +74,9 @@ const LoginForm = () => {
           />
         </div>
         <div>
-          <CompleteButton>Log in</CompleteButton>
+          <CompleteButton>
+            {isLoading ? "Logging in..." : "Log in"}
+          </CompleteButton>
         </div>
         <div>
           <Link href="/signup">Need an account?</Link>
