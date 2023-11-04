@@ -35,7 +35,7 @@ const Header = ({ me }: any) => {
         </Link>
 
         <SubNav>
-          {/* {user ? (
+          {user ? (
             <>
               <UploadButton>Upload</UploadButton>
               <Link href="/profile">
@@ -53,7 +53,7 @@ const Header = ({ me }: any) => {
                 <Link href="/login">Log In</Link>
               </LoginButton>
             </>
-          )} */}
+          )}
 
           <ExtraMenu>
             <HiOutlineDotsVertical />
