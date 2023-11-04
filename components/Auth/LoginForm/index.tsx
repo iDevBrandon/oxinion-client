@@ -62,7 +62,13 @@ const LoginForm = () => {
         <div>
           <label htmlFor="email">Email</label>
           <br />
-          <input name="email" value={email} onChange={onChangeEmail} required />
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={onChangeEmail}
+            required
+          />
         </div>
         <div>
           <label htmlFor="password">Password</label>
