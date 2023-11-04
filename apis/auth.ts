@@ -13,6 +13,6 @@ export function signInAPI(data: { email: string; password: string }) {
   return api.post("/auth/login", data).then((response) => response.data);
 }
 
-export function loadMyInfoAPI() {
-  return api.get("/users").then((response) => response.data);
+export function loadMyInfoAPI(options?: AxiosRequestConfig) {
+  return api.get("/user", options).then((response) => response.data);
 }
