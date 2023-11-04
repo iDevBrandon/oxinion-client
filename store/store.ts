@@ -5,7 +5,7 @@ export const store = configureStore({
   reducer: {
     global: globalSlice.reducer,
   },
-  devTools: process.env.NODE_ENV !== "production",
+  devTools: process.env.NEXT_PUBLIC_NODE_ENV !== "production",
 });
 
 export type RootState = ReturnType<typeof store.getState>;
