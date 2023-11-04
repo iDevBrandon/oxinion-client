@@ -39,14 +39,13 @@ const Header = ({ me }: any) => {
           {user ? (
             <>
               <UploadButton>Upload</UploadButton>
-              <Link href="/profile">
-                <UserIcon>
+                 <UserIcon>
                   <FaUserAstronaut
                     onClick={() => setDropdownOpen(!dropdownOpen)}
                   />
                   {dropdownOpen && <Dropdown />}
                 </UserIcon>
-              </Link>
+               
             </>
           ) : (
             <>

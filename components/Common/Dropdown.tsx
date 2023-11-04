@@ -3,15 +3,6 @@ import { GoSignOut } from "react-icons/go";
 import { RiUserSmileLine } from "react-icons/ri";
 import { DropdownWrapper, MenuItem } from "./styles";
 
-// const DropdownItem = (props) => {
-//   return (
-//     <MenuItem>
-//       <span className="icon-button">{props.icon}</span>
-//       {props.children}
-//     </MenuItem>
-//   );
-// };
-
 const Dropdown = () => {
   return (
     <DropdownWrapper>
@@ -19,9 +10,9 @@ const Dropdown = () => {
         <RiUserSmileLine />
         <span>&nbsp;Profile</span>
       </MenuItem>
-      <MenuItem onClick={() => console.log("sign")}>
+      <MenuItem onClick={() => console.log("logout")}>
         <GoSignOut />
-        <span style={{ fontSize: "0.7rem" }}>&nbsp;Sign out</span>
+        <span>&nbsp;Sign out</span>
       </MenuItem>
     </DropdownWrapper>
   );

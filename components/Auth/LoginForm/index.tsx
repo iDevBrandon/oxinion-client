@@ -10,6 +10,8 @@ import {
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { signInAPI } from "@/apis/auth";
 import useMyInfoQuery from "@/hooks/queries/useMyInfoQuery";
+import { LoginButton } from "./styles";
+import { CircularProgress } from "@mui/material";
 
 const LoginForm = () => {
   const queryClient = useQueryClient();
@@ -75,7 +77,11 @@ const LoginForm = () => {
         </div>
         <div>
           <CompleteButton>
-            {isLoading ? "Logging in..." : "Log in"}
+            {isLoading ? (
+              <CircularProgress />
+            ) : (
+              <LoginButton>Log in</LoginButton>
+            )}
           </CompleteButton>
         </div>
         <div>
