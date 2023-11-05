@@ -44,7 +44,7 @@ function LocationSelector(props: any) {
       // setFormData(e.latlng)
       props.setFormData(e.latlng);
       // map.flyTo(e.latlng, map.getZoom());
-      // map.locate();
+      map.locate();
     },
 
     locationfound: (location) => {
@@ -63,17 +63,30 @@ export default function Map({ formData, setFormData }: any) {
   console.log(geoData);
 
   const center: any = [geoData.lat, geoData.lng];
+  // const handleClick = (e: any) => {
+  //   // Update formData with the clicked location
+  //   setFormData(e.latlng);
+
+  //   // Center the map on the clicked location
+  //   map?.setView(e.latlng, map.getZoom(), {
+  //     animate: true,
+  //   });
+
+  //   // Update geoData after the map view is updated
+  //   setGeoData(e.latlng);
+  // };
+
   const handleClick = (e: any) => {
     // Update formData with the clicked location
     setFormData(e.latlng);
+
+    // Update geoData to re-render the Marker component
+    setGeoData(e.latlng);
 
     // Center the map on the clicked location
     map?.setView(e.latlng, map.getZoom(), {
       animate: true,
     });
-
-    // Update geoData after the map view is updated
-    setGeoData(e.latlng);
   };
 
   return (
@@ -96,7 +109,7 @@ export default function Map({ formData, setFormData }: any) {
               click: (e) => {},
             }}
           ></Marker>
-        )} */}
+        )}
         {formData &&
           formData.lat !== undefined &&
           formData.lng !== undefined && (
@@ -107,7 +120,26 @@ export default function Map({ formData, setFormData }: any) {
                 click: (e) => {},
               }}
             ></Marker>
-          )}
+          )} */}
+        {formData &&
+        formData.lat !== undefined &&
+        formData.lng !== undefined ? (
+          <Marker
+            position={[formData.lat, formData.lng]}
+            icon={Icon}
+            eventHandlers={{
+              click: (e) => {},
+            }}
+          ></Marker>
+        ) : geoData.lat !== undefined && geoData.lng !== undefined ? (
+          <Marker
+            position={[geoData.lat, geoData.lng]}
+            icon={Icon}
+            eventHandlers={{
+              click: (e) => {},
+            }}
+          ></Marker>
+        ) : null}
         {/* <ChangeView coords={center} /> */}
         {map && (
           <MapViewInitializer
