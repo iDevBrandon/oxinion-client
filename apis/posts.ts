@@ -5,3 +5,7 @@ export function loadPostsAPI(lastId?: number) {
     .get(`/posts?lastId=${lastId || 0}`)
     .then((response) => response.data);
 }
+
+export function addPostAPI(data: any) {
+  return api.post("/post", data).then((response) => response.data);
+}

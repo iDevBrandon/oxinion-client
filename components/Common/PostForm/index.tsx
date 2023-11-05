@@ -39,7 +39,10 @@ const PostForm = ({ open, handleClose }: any) => {
     e.preventDefault();
 
     console.log("submitted post");
+    
   }, []);
+
+  console.log(formData)
 
   const steps = ["Location", "Images", "Details"];
   const PageDisplay = () => {

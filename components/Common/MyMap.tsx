@@ -12,6 +12,7 @@ import {
 } from "react-leaflet";
 import { icon } from "leaflet";
 import { MapOutter } from "./styles";
+import useGeoLocation from "@/hooks/useGeoLocation";
 
 const Icon = icon({
   iconUrl: "/images/oxinion_logo.png",
@@ -24,7 +25,6 @@ export function MapViewInitializer({ coords, formData }: any) {
 
   console.log(formData);
   console.log(coords);
-
   console.log([formData?.lat, formData?.lng]);
 
   useEffect(() => {
@@ -47,10 +47,10 @@ function LocationSelector(props: any) {
       map.locate();
     },
 
-    locationfound: (location) => {
-      console.log("location found:", location);
-      map.flyTo(location.latlng, map.getZoom());
-    },
+    // locationfound: (location) => {
+    //   console.log("location found:", location);
+    //   map.flyTo(location.latlng, map.getZoom());
+    // },
   });
 
   return <p></p>;
@@ -59,22 +59,46 @@ function LocationSelector(props: any) {
 export default function Map({ formData, setFormData }: any) {
   const [geoData, setGeoData] = useState({ lat: 51.509865, lng: -0.118092 });
   const [map, setMap] = useState<any>(null);
+  const userlocation = useGeoLocation();
 
-  console.log(geoData);
+  let center: [number, number] = [geoData.lat, geoData.lng];
+  let markerPosition: [number, number] | undefined = undefined;
 
-  const center: any = [geoData.lat, geoData.lng];
-  // const handleClick = (e: any) => {
-  //   // Update formData with the clicked location
-  //   setFormData(e.latlng);
+  if (formData.lat !== undefined && formData.lng !== undefined) {
+    // If formData has coordinates, use them
+    center = [formData.lat, formData.lng];
+    markerPosition = [formData.lat, formData.lng];
+  } else if (userlocation.loaded) {
+    // If userlocation is loaded, use its coordinates
+    center = [
+      userlocation.coordinates?.lat || geoData.lat,
+      userlocation.coordinates?.lng || geoData.lng,
+    ];
+    markerPosition = [
+      userlocation.coordinates?.lat || geoData.lat,
+      userlocation.coordinates?.lng || geoData.lng,
+    ];
+  }
 
-  //   // Center the map on the clicked location
-  //   map?.setView(e.latlng, map.getZoom(), {
-  //     animate: true,
-  //   });
+  useEffect(() => {
+    if (userlocation.loaded) {
+      // Set the center to the user's location coordinates
+      const userLocation = userlocation.coordinates;
+      if (
+        map &&
+        userLocation?.lat !== undefined &&
+        userLocation?.lng !== undefined
+      ) {
+        setGeoData(userLocation);
+        setFormData(userLocation);
 
-  //   // Update geoData after the map view is updated
-  //   setGeoData(e.latlng);
-  // };
+        // Set the map's center to the user's location
+        map.setView([userLocation.lat, userLocation.lng], map.getZoom(), {
+          animate: true,
+        });
+      }
+    }
+  }, [userlocation.loaded, userlocation.coordinates, map, setFormData]);
 
   const handleClick = (e: any) => {
     // Update formData with the clicked location
@@ -101,46 +125,15 @@ export default function Map({ formData, setFormData }: any) {
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {/* {geoData.lat && geoData.lng && (
+        {markerPosition && (
           <Marker
-            position={[geoData.lat, geoData.lng]}
+            position={markerPosition}
             icon={Icon}
             eventHandlers={{
               click: (e) => {},
             }}
           ></Marker>
         )}
-        {formData &&
-          formData.lat !== undefined &&
-          formData.lng !== undefined && (
-            <Marker
-              position={[formData.lat, formData.lng]}
-              icon={Icon}
-              eventHandlers={{
-                click: (e) => {},
-              }}
-            ></Marker>
-          )} */}
-        {formData &&
-        formData.lat !== undefined &&
-        formData.lng !== undefined ? (
-          <Marker
-            position={[formData.lat, formData.lng]}
-            icon={Icon}
-            eventHandlers={{
-              click: (e) => {},
-            }}
-          ></Marker>
-        ) : geoData.lat !== undefined && geoData.lng !== undefined ? (
-          <Marker
-            position={[geoData.lat, geoData.lng]}
-            icon={Icon}
-            eventHandlers={{
-              click: (e) => {},
-            }}
-          ></Marker>
-        ) : null}
-        {/* <ChangeView coords={center} /> */}
         {map && (
           <MapViewInitializer
             map={map}
@@ -149,7 +142,6 @@ export default function Map({ formData, setFormData }: any) {
             onClick={handleClick}
           />
         )}
-
         <LocationSelector
           map={map}
           formData={formData}
