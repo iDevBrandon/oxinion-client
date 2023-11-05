@@ -26,10 +26,11 @@ export const StyledButton = styled.button`
   touch-action: manipulation;
   white-space: nowrap;
   background-image: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
+  min-width: 64px;
 
   span {
     background-color: rgb(5, 6, 45);
-    padding: 16px 24px;
+    padding: 10px;
     border-radius: 6px;
     width: 100%;
     height: 100%;
@@ -43,3 +44,16 @@ export const StyledButton = styled.button`
     }
   }
 `;
+
+// Form
+export const FormFooter = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+`;
+
+// Location
+export const Location = styled.div``;
+
+// Images
+
+// Details

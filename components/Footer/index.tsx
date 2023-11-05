@@ -115,7 +115,7 @@ const Footer = () => {
         </div>
 
         <small className="footer__copyright-text">
-          Copyright 2022 OXINION | All rights reserved.
+          Copyright 2023 OXINION | All rights reserved.
         </small>
       </SeconaryWrapper>
     </FooterContainer>
