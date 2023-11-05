@@ -2,10 +2,10 @@ import dynamic from "next/dynamic";
 
 const MyMap = dynamic(() => import("./MyMap"), { ssr: false });
 
-const ShowMap = () => {
+const ShowMap = ({ formData, setFormData }: any) => {
   return (
     <>
-      <MyMap />
+      <MyMap formData={formData} setFormData={setFormData} />
     </>
   );
 };

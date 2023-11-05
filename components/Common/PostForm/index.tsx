@@ -21,7 +21,20 @@ import DetailsForm from "./DetailsForm";
 import { FormFooter, StyledButton, TransparentButton } from "./styles";
 
 const PostForm = ({ open, handleClose }: any) => {
+  interface FormData {
+    latitude: number;
+    longitude: number;
+    imagePaths: string[];
+    desc: string;
+  }
+
   const [page, setPage] = useState(0);
+  const [formData, setFormData] = useState<FormData>({
+    latitude: 0,
+    longitude: 0,
+    imagePaths: [],
+    desc: "",
+  });
   const onSubmit = useCallback((e: any) => {
     e.preventDefault();
 
@@ -31,11 +44,11 @@ const PostForm = ({ open, handleClose }: any) => {
   const steps = ["Location", "Images", "Details"];
   const PageDisplay = () => {
     if (page === 0) {
-      return <LocationForm />;
+      return <LocationForm formData={formData} setFormData={setFormData} />;
     } else if (page === 1) {
       return <ImagesForm />;
     } else {
-      return <DetailsForm />;
+      return <DetailsForm formData={formData} setFormData={setFormData} />;
     }
   };
   return (
@@ -70,13 +83,25 @@ const PostForm = ({ open, handleClose }: any) => {
         <FormFooter>
           <TransparentButton
             style={{ outline: "none" }}
+            disabled={page == 0}
             onClick={() => setPage(page - 1)}
           >
-            <span>Back</span>
+            {page !== 0 && <span>Back</span>}
           </TransparentButton>
-          <StyledButton onClick={() => setPage(page + 1)} color="primary">
-            <span>Next</span>
-          </StyledButton>
+
+          {page === steps.length - 1 ? (
+            <StyledButton
+              onClick={() => {
+                if (page === steps.length - 1) console.log(formData);
+              }}
+            >
+              <span>Submit</span>
+            </StyledButton>
+          ) : (
+            <StyledButton onClick={() => setPage(page + 1)} color="primary">
+              <span>Next</span>
+            </StyledButton>
+          )}
         </FormFooter>
       </Dialog>
     </div>

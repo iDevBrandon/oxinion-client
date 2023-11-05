@@ -15,7 +15,7 @@ const Location = ({ params }: any) => {
   return (
     <DiscoverContainer>
       <MapSection>
-        <ShowMap />
+        {/* <ShowMap /> */}
       </MapSection>
 
       <ContentsContainer>

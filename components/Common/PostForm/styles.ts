@@ -40,7 +40,7 @@ export const StyledButton = styled.button`
   @media (min-width: 768px) {
     & {
       font-size: 24px;
-      min-width: 196px;
+      /* min-width: 196px; */
     }
   }
 `;

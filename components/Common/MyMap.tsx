@@ -1,5 +1,6 @@
 "use client";
-import { useState, useEffect, useMemo } from "react";
+
+import { useState, useEffect } from "react";
 import "leaflet/dist/leaflet.css";
 import {
   MapContainer,
@@ -7,79 +8,122 @@ import {
   Marker,
   useMap,
   useMapEvents,
+  Popup,
 } from "react-leaflet";
-import { LatLngLiteral, icon } from "leaflet";
-import oxinionLogo from "../../public/images/oxinion_logo.png";
+import { icon } from "leaflet";
 import { MapOutter } from "./styles";
 
 const Icon = icon({
-  iconUrl: oxinionLogo.src,
+  iconUrl: "/images/oxinion_logo.png",
   iconSize: [24, 24],
   iconAnchor: [12, 24],
 });
 
-export function ChangeView({ coords }: any) {
+export function MapViewInitializer({ coords, formData }: any) {
   const map = useMap();
 
-  map.setView(coords, 12);
+  console.log(formData);
+  console.log(coords);
+
+  console.log([formData?.lat, formData?.lng]);
+
+  useEffect(() => {
+    if (formData?.lat !== undefined && formData?.lng !== undefined) {
+      map.setView([formData.lat, formData.lng], 11);
+    }
+  }, [formData, map]);
+
   return null;
 }
 
-function DisplayPosition({ map }: any) {
-  const [position, setPosition] = useState<any>(null);
+function LocationSelector(props: any) {
+  console.log(props.formData);
 
-  useEffect(() => {
-    map?.on("click", (e: any) => {
-      setPosition(e.latlng);
-    });
-  }, []);
+  const map = useMapEvents({
+    click: (e) => {
+      // setFormData(e.latlng)
+      props.setFormData(e.latlng);
+      // map.flyTo(e.latlng, map.getZoom());
+      // map.locate();
+    },
 
-  console.log(position);
+    locationfound: (location) => {
+      console.log("location found:", location);
+      map.flyTo(location.latlng, map.getZoom());
+    },
+  });
 
-  return (
-    <div style={{ display: "flex" }}>
-      <p style={{ margin: 0 }}>latitude: </p>{" "}
-      <small>{position?.lat.toFixed(4)}</small>
-      <p style={{ margin: 0 }}>longitude: </p>{" "}
-      <small>{position?.lng.toFixed(4)}</small>
-    </div>
-  );
+  return <p></p>;
 }
 
-export default function Map() {
+export default function Map({ formData, setFormData }: any) {
   const [geoData, setGeoData] = useState({ lat: 51.509865, lng: -0.118092 });
   const [map, setMap] = useState<any>(null);
 
-  const center: any = [geoData.lat, geoData.lng];
+  console.log(geoData);
 
-  const displayMap = useMemo(
-    () => (
-      <>
-        <MapContainer
-          center={center}
-          zoom={8}
-          ref={setMap}
-          style={{ height: "80%" }}
-        >
-          <TileLayer
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          {geoData.lat && geoData.lng && (
-            <Marker position={[geoData.lat, geoData.lng]} icon={Icon}></Marker>
-          )}
-          <ChangeView coords={center} />
-          <DisplayPosition map={map} />
-        </MapContainer>
-      </>
-    ),
-    []
-  );
+  const center: any = [geoData.lat, geoData.lng];
+  const handleClick = (e: any) => {
+    // Update formData with the clicked location
+    setFormData(e.latlng);
+
+    // Center the map on the clicked location
+    map?.setView(e.latlng, map.getZoom(), {
+      animate: true,
+    });
+
+    // Update geoData after the map view is updated
+    setGeoData(e.latlng);
+  };
 
   return (
     <MapOutter>
-      <div> {map ? <DisplayPosition map={map} /> : null}</div>
-      {displayMap}
+      <MapContainer
+        center={center}
+        zoom={8}
+        ref={setMap}
+        style={{ height: "inherit" }}
+      >
+        <TileLayer
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        {/* {geoData.lat && geoData.lng && (
+          <Marker
+            position={[geoData.lat, geoData.lng]}
+            icon={Icon}
+            eventHandlers={{
+              click: (e) => {},
+            }}
+          ></Marker>
+        )} */}
+        {formData &&
+          formData.lat !== undefined &&
+          formData.lng !== undefined && (
+            <Marker
+              position={[formData.lat, formData.lng]}
+              icon={Icon}
+              eventHandlers={{
+                click: (e) => {},
+              }}
+            ></Marker>
+          )}
+        {/* <ChangeView coords={center} /> */}
+        {map && (
+          <MapViewInitializer
+            map={map}
+            coords={center}
+            formData={formData}
+            onClick={handleClick}
+          />
+        )}
+
+        <LocationSelector
+          map={map}
+          formData={formData}
+          setFormData={setFormData}
+        />
+      </MapContainer>
     </MapOutter>
   );
 }
