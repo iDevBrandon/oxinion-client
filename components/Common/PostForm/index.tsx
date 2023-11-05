@@ -18,6 +18,7 @@ import { useDispatch } from "react-redux";
 import LocationForm from "./LocationForm";
 import ImagesForm from "./ImagesForm";
 import DetailsForm from "./DetailsForm";
+import { StyledButton, TransparentButton } from "./styles";
 
 const PostForm = ({ open, handleClose }: any) => {
   const [page, setPage] = useState(0);
@@ -67,22 +68,15 @@ const PostForm = ({ open, handleClose }: any) => {
           {PageDisplay()}
         </div>
         <div className="footer">
-          <Button
+          <TransparentButton
+            style={{ outline: "none" }}
             onClick={() => setPage(page - 1)}
-            variant="contained"
-            sx={{ mt: 3, ml: 1 }}
-            color="primary"
           >
-            Back
-          </Button>
-          <Button
-            onClick={() => setPage(page + 1)}
-            variant="contained"
-            sx={{ mt: 3, ml: 1 }}
-            color="primary"
-          >
-            Next
-          </Button>
+            <span>Back</span>
+          </TransparentButton>
+          <StyledButton onClick={() => setPage(page + 1)} color="primary">
+            <span>Next</span>
+          </StyledButton>
         </div>
       </Dialog>
     </div>

@@ -1,9 +1,12 @@
 import React from "react";
+import ShowMap from "../ShowMap";
 
 const LocationForm = () => {
   return (
     <div>
-      <h1>Map</h1>
+      <div id="map">
+        <ShowMap />
+      </div>
       <div>
         <input placeholder="Lat" />
         <input placeholder="Lng" />
