@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import "leaflet/dist/leaflet.css";
 import {
   MapContainer,
@@ -25,28 +25,24 @@ export function ChangeView({ coords }: any) {
   return null;
 }
 
-function LocationMarker({ mapMarker }: any) {
-  const [position, setPosition] = useState<LatLngLiteral | null>(null);
-  const map = useMapEvents({
-    click(e) {
-      console.log(e.latlng);
-      setPosition(e.latlng);
+function DisplayPosition({ map }: any) {
+  const [position, setPosition] = useState<any>(null);
 
-      // map.locate();
-    },
-    // locationfound(e) {
-    //   setPosition(e.latlng);
-    //   map.flyTo(e.latlng, map.getZoom());
-    // },
-  });
+  useEffect(() => {
+    map?.on("click", (e: any) => {
+      setPosition(e.latlng);
+    });
+  }, []);
 
   console.log(position);
 
   return (
-    <p>
-      latitude : {position?.lat.toFixed(4)}
-      longitude : {position?.lng.toFixed(4)}
-    </p>
+    <div style={{ display: "flex" }}>
+      <p style={{ margin: 0 }}>latitude: </p>{" "}
+      <small>{position?.lat.toFixed(4)}</small>
+      <p style={{ margin: 0 }}>longitude: </p>{" "}
+      <small>{position?.lng.toFixed(4)}</small>
+    </div>
   );
 }
 
@@ -56,24 +52,34 @@ export default function Map() {
 
   const center: any = [geoData.lat, geoData.lng];
 
+  const displayMap = useMemo(
+    () => (
+      <>
+        <MapContainer
+          center={center}
+          zoom={8}
+          ref={setMap}
+          style={{ height: "80%" }}
+        >
+          <TileLayer
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          {geoData.lat && geoData.lng && (
+            <Marker position={[geoData.lat, geoData.lng]} icon={Icon}></Marker>
+          )}
+          <ChangeView coords={center} />
+          <DisplayPosition map={map} />
+        </MapContainer>
+      </>
+    ),
+    []
+  );
+
   return (
     <MapOutter>
-      <MapContainer
-        center={center}
-        zoom={8}
-        ref={setMap}
-        style={{ height: "inherit" }}
-      >
-        <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        {geoData.lat && geoData.lng && (
-          <Marker position={[geoData.lat, geoData.lng]} icon={Icon}></Marker>
-        )}
-        <ChangeView coords={center} />
-        <LocationMarker mapMarker={map} />
-      </MapContainer>
+      <div> {map ? <DisplayPosition map={map} /> : null}</div>
+      {displayMap}
     </MapOutter>
   );
 }
