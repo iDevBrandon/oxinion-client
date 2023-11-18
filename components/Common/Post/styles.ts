@@ -59,7 +59,7 @@ export const ProfileWrapper = styled.div`
 export const PostProp = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 0 0.5rem;
+  padding: 1rem 1rem 0 1rem;
 `;
 
 export const CardActionWrapper = styled.div`
