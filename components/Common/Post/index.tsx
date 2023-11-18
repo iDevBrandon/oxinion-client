@@ -7,6 +7,7 @@ import {
   PostDetails,
   ProfileWrapper,
   PostProp,
+  LikeButton,
 } from "./styles";
 import useMyInfoQuery from "@/hooks/queries/useMyInfoQuery";
 import Popover from "./Popover";
@@ -20,13 +21,16 @@ const Post = ({ post }: any) => {
   const { data: user, error } = useMyInfoQuery();
   const [liked, setLiked] = useState(false);
   const popoverHandler = (e: any) => {
-    console.log("open");
     setPopoverOpen(!popoverOpen);
   };
 
   const onToggleLike = useCallback(() => {
     setLiked((prev) => !prev);
     console.log("clicked like");
+  }, []);
+
+  const onToggleComment = useCallback(() => {
+    setCommentFormOpen(!commentFormOpen);
   }, []);
 
   return (
@@ -57,22 +61,21 @@ const Post = ({ post }: any) => {
             </div>
           </div>
         </PostProp>
-
         <CardActions disableSpacing style={{ display: "flex" }}>
           <div style={{ margin: "0 0.5rem" }}>
             {liked ? (
-              <>
-                <FcLike onClick={onToggleLike} />
-                <small>0</small>
-              </>
+              <LikeButton>
+              <FcLike onClick={onToggleLike} />
+              <small>1</small>
+            </LikeButton>
             ) : (
-              <>
+              <LikeButton>
                 <HiOutlineHeart onClick={onToggleLike} />
                 <small>0</small>
-              </>
+              </LikeButton>
             )}
           </div>
-          <div>
+          <div onClick={onToggleComment} style={{ margin: "0 0.5rem" }}>
             <MdComment />
           </div>
           <div onClick={popoverHandler}>
@@ -80,7 +83,6 @@ const Post = ({ post }: any) => {
             {popoverOpen && <Popover open={popoverOpen} />}
           </div>
         </CardActions>
-
         <CardContent>
           <Typography variant="body2" color="text.secondary">
             This impressive paella is a perfect party dish and a fun meal to
@@ -88,7 +90,7 @@ const Post = ({ post }: any) => {
             the mussels, if you like.
           </Typography>
         </CardContent>
-        <Comments />
+        {commentFormOpen && <Comments post={post} />}
       </PostDetails>
     </Card>
   );

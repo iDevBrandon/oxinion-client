@@ -53,3 +53,14 @@ export const PostProp = styled.div`
   justify-content: space-between;
   margin: 0 0.5rem;
 `;
+
+export const CardActionWrapper = styled.div`
+  div {
+    justify-content: space-between;
+  }
+`;
+
+export const LikeButton = styled.div`
+  align-items: center;
+  display: flex;
+`;

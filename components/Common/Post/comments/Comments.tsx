@@ -1,8 +1,14 @@
 import React from "react";
-import { PostCommentWrapper } from "./styles";
-import { List, ListItem, ListItemText, TextField, Typography } from "@mui/material";
+import { CommentWrapper, PostCommentWrapper } from "./styles";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import Divider from "@mui/material/Divider";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Typography from "@mui/material/Typography";
+import CommentForm from "./CommentForm";
 
-const Comments = () => {
+const Comments = ({ post }: any) => {
   return (
     <PostCommentWrapper>
       <List sx={{ width: "100%", bgcolor: "background.paper" }}>
@@ -59,11 +65,7 @@ const Comments = () => {
         </ListItem>
       </List>
       <div style={{ padding: "0 1rem", width: "100%" }}>
-        <TextField
-          id="standard-basic"
-          label="Add a comment..."
-          variant="standard"
-        />
+        <CommentForm post={post} />
       </div>
     </PostCommentWrapper>
   );
