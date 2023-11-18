@@ -14,6 +14,7 @@ import Popover from "./Popover";
 import { FcLike } from "react-icons/fc";
 import { Card, CardActions, CardContent, Typography } from "@mui/material";
 import Comments from "./comments/Comments";
+import Image from "next/image";
 
 const Post = ({ post }: any) => {
   const [popoverOpen, setPopoverOpen] = useState(false);
@@ -33,10 +34,12 @@ const Post = ({ post }: any) => {
     setCommentFormOpen(!commentFormOpen);
   }, []);
 
+  console.log(post);
+
   return (
     <Card>
       <PostImage onDoubleClick={onToggleLike}>
-        <img src={post.images[0]} alt="post" />
+        <Image src={post.images[0]} alt="post" width="468" height="468" />
       </PostImage>
       <PostDetails>
         <PostProp>
@@ -65,9 +68,9 @@ const Post = ({ post }: any) => {
           <div style={{ margin: "0 0.5rem" }}>
             {liked ? (
               <LikeButton>
-              <FcLike onClick={onToggleLike} />
-              <small>1</small>
-            </LikeButton>
+                <FcLike onClick={onToggleLike} />
+                <small>1</small>
+              </LikeButton>
             ) : (
               <LikeButton>
                 <HiOutlineHeart onClick={onToggleLike} />
@@ -85,9 +88,7 @@ const Post = ({ post }: any) => {
         </CardActions>
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-            This impressive paella is a perfect party dish and a fun meal to
-            cook together with your guests. Add 1 cup of frozen peas along with
-            the mussels, if you like.
+            {post.description}
           </Typography>
         </CardContent>
         {commentFormOpen && <Comments post={post} />}

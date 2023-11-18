@@ -164,6 +164,10 @@ export const ExtraMenu = styled.button`
 `;
 
 export const LoginButton = styled.button<LoginButtonProps>`
+  &:first-child {
+    margin-right: 1rem;
+  }
+
   a {
     border: 2px solid #002663;
     display: block;
@@ -174,12 +178,8 @@ export const LoginButton = styled.button<LoginButtonProps>`
     padding: 6px 8px;
     font-weight: 700;
     font-size: 16px;
-    margin-left: 16px;
     border-radius: 30px;
     text-decoration: none;
-  }
-
-  @media (min-width: 768px) {
   }
 `;
 
