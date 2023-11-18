@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { HiOutlineHeart } from "react-icons/hi";
 import { MdOutlineMoreHoriz } from "react-icons/md";
 import {
@@ -10,12 +10,27 @@ import {
   CommentWrapper,
   PostCommentWrapper,
 } from "./styles";
-
+import useMyInfoQuery from "@/hooks/queries/useMyInfoQuery";
+import Popover from "./Popover";
+import { FcLike } from "react-icons/fc";
 const Post = ({ post }: any) => {
+  const [popoverOpen, setPopoverOpen] = useState(false);
+  const { data: user, error } = useMyInfoQuery();
+  const [liked, setLiked] = useState(false);
+  const popoverHandler = (e: any) => {
+    console.log("open");
+    setPopoverOpen(!popoverOpen);
+  };
+
+  const onToggleLike = useCallback(() => {
+    setLiked((prev) => !prev);
+    console.log("clicked like");
+  }, []);
+
   return (
     <PostWrapper>
-      <PostImage>
-        <img src="https://picsum.photos/199" alt="post" />
+      <PostImage onDoubleClick={onToggleLike}>
+        <img src={post.images[0]} alt="post" />
       </PostImage>
       <PostDetails>
         <PostProp>
@@ -28,10 +43,15 @@ const Post = ({ post }: any) => {
           <div className="right" style={{ display: "flex" }}>
             <div>472 likes</div>
             <div style={{ margin: "0 0.5rem" }}>
-              <HiOutlineHeart />
+              {liked ? (
+                <FcLike onClick={onToggleLike} />
+              ) : (
+                <HiOutlineHeart onClick={onToggleLike} />
+              )}{" "}
             </div>
-            <div>
+            <div onClick={popoverHandler}>
               <MdOutlineMoreHoriz />
+              {popoverOpen && <Popover open={popoverOpen} />}
             </div>
           </div>
         </PostProp>
