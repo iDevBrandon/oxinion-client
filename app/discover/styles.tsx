@@ -91,6 +91,7 @@ export const LatestFeedContainer = styled.div`
 `;
 
 export const FeedContainer = styled.div`
+  margin: 0 1rem;
   @media (min-width: 768px) {
     display: flex;
     flex-direction: column;
@@ -105,7 +106,6 @@ export const MapController = styled.div`
   display: none;
   background: grey;
   @media (min-width: 768px) {
-    
     order: 2;
     display: inline-block;
     position: relative;

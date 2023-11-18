@@ -34,6 +34,7 @@ module.exports = {
       "source.unsplash.com",
       "picsum.photos",
       "firebasestorage.googleapis.com",
+      "swiperjs.com",
     ],
   },
 };

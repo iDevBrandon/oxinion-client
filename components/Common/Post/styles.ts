@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const PostWrapper = styled.div`
-  img {
+  margin-bottom: 1rem;
+  /* img {
     object-fit: cover;
     width: 100%;
   }
@@ -9,10 +10,17 @@ export const PostWrapper = styled.div`
   @media (min-width: 768px) {
     display: grid;
     grid-template-columns: 60% 40%;
-  }
+
+  } */
 `;
 
 export const PostImage = styled.div`
+  width: 614px;
+  height: 768px;
+  object-fit: cover;
+`;
+
+export const PostImageWrapper = styled.div`
   width: 100%;
   img {
     object-fit: cover;
