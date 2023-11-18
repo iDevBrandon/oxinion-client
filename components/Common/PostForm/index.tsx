@@ -35,22 +35,21 @@ const PostForm = ({ open, handleClose }: any) => {
     imagePaths: [],
     desc: "",
   });
-  const onSubmit = useCallback((e: any) => {
+  const handleSubmit = useCallback((e: any) => {
     e.preventDefault();
 
     console.log("submitted post");
-    
   }, []);
 
-  console.log(formData)
+  console.log(formData);
 
   const steps = ["Location", "Images", "Details"];
   const PageDisplay = () => {
     if (page === 0) {
       return <LocationForm formData={formData} setFormData={setFormData} />;
     } else if (page === 1) {
-      return <ImagesForm />;
-    } else {
+      return <ImagesForm formData={formData} setFormData={setFormData}/>
+        } else {
       return <DetailsForm formData={formData} setFormData={setFormData} />;
     }
   };
@@ -70,42 +69,46 @@ const PostForm = ({ open, handleClose }: any) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <Box sx={{ width: "100%" }}>
-          <Stepper activeStep={page} alternativeLabel>
-            {steps.map((label) => (
-              <Step key={label}>
-                <StepLabel>{label}</StepLabel>
-              </Step>
-            ))}
-          </Stepper>
-        </Box>
+        <div>
+          <Box sx={{ width: "100%" }}>
+            <Stepper activeStep={page} alternativeLabel>
+              {steps.map((label) => (
+                <Step key={label}>
+                  <StepLabel>{label}</StepLabel>
+                </Step>
+              ))}
+            </Stepper>
+          </Box>
 
-        <div className="body" style={{ padding: "1rem" }}>
-          {PageDisplay()}
-        </div>
-        <FormFooter>
-          <TransparentButton
-            style={{ outline: "none" }}
-            disabled={page == 0}
-            onClick={() => setPage(page - 1)}
-          >
-            {page !== 0 && <span>Back</span>}
-          </TransparentButton>
-
-          {page === steps.length - 1 ? (
-            <StyledButton
-              onClick={() => {
-                if (page === steps.length - 1) console.log(formData);
-              }}
+          <div className="body" style={{ padding: "1rem" }}>
+            {PageDisplay()}
+          </div>
+          <FormFooter>
+            <TransparentButton
+              style={{ outline: "none" }}
+              disabled={page == 0}
+              onClick={() => setPage(page - 1)}
             >
-              <span>Submit</span>
-            </StyledButton>
-          ) : (
-            <StyledButton onClick={() => setPage(page + 1)} color="primary">
-              <span>Next</span>
-            </StyledButton>
-          )}
-        </FormFooter>
+              <span>Back</span>
+            </TransparentButton>
+
+            {page === steps.length - 1 ? (
+              <StyledButton
+                onClick={() => {
+                  if (page === steps.length - 1) console.log(formData);
+                  // dispatch(addPost(formData));
+                  handleClose();
+                }}
+              >
+                <span>Submit</span>
+              </StyledButton>
+            ) : (
+              <StyledButton onClick={() => setPage(page + 1)} color="primary">
+                <span>Next</span>
+              </StyledButton>
+            )}
+          </FormFooter>
+        </div>
       </Dialog>
     </div>
   );

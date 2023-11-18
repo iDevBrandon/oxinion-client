@@ -4,8 +4,8 @@ const DetailsForm = ({ formData, setFormData }: any) => {
   return (
     <div>
       <input
-        placeholder="Description"
-        value={formData.desc}
+        placeholder="What's going on here"
+        value={formData.desc  || ''}  
         onChange={(e) => setFormData({ ...formData, desc: e.target.value })}
       />
     </div>
