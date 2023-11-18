@@ -69,8 +69,9 @@ export const HeaderNav = styled.nav`
   width: 100%;
   box-shadow: 0 1px 3px rgb(0 0 0 / 10%), 0 2px 2px rgb(0 0 0 / 6%),
     0 0 2px rgb(0 0 0 / 7%);
-  /* box-shadow: 0px 5px 10px 0px rgba(0, 255, 255, 0.7); */
-`;
+  padding: 1rem;
+    
+ `;
 
 export const StyledLogo = styled.div`
   color: #fff;
@@ -79,8 +80,6 @@ export const StyledLogo = styled.div`
   text-decoration: none;
   font-size: 2rem;
   display: block;
-  padding-left: 1rem;
-  /* position: absolute; */
   height: 40px;
   /* transform: translate(5%, 5%); */
   img {
@@ -104,7 +103,6 @@ export const NavList = styled.ul`
 
 export const SubNav = styled.div`
   display: flex;
-  padding-right: 1rem;
   height: 36px;
   align-items: center;
 
