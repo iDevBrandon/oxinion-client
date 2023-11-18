@@ -29,6 +29,8 @@ import useGeoLocation from "@/hooks/useGeoLocation";
 import { MdDownloading } from "react-icons/md";
 
 const Discover = () => {
+  const DEFAULT_LATITUDE = 51.509865;
+  const DEFAULT_LONGITUDE = -0.118092;
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -38,18 +40,10 @@ const Discover = () => {
   const location = searchParams.get("location");
   const term = searchParams.get("term");
 
-  const userLat = Number(userlocation.coordinates.lat);
-  const userLng = Number(userlocation.coordinates.lng);
+  const userLat = Number(userlocation?.coordinates?.lat) || DEFAULT_LATITUDE;
+  const userLng = Number(userlocation?.coordinates?.lng) || DEFAULT_LONGITUDE;
 
   console.log(userLat, userLng);
-  console.log(
-    typeof userlocation.coordinates.lat,
-    userlocation.coordinates.lat
-  );
-  console.log(
-    typeof userlocation.coordinates.lng,
-    userlocation.coordinates.lng
-  );
 
   // const { data } = useInfiniteQuery(
   //   ["posts"],
@@ -76,7 +70,7 @@ const Discover = () => {
   );
 
   useEffect(() => {
-    if (userlocation.loaded) {
+    if (userlocation.loaded && userlocation.coordinates) {
       const userLat = userlocation.coordinates.lat;
       const userLng = userlocation.coordinates.lng;
 
@@ -88,8 +82,8 @@ const Discover = () => {
     }
   }, [
     userlocation.loaded,
-    userlocation.coordinates.lat,
-    userlocation.coordinates.lng,
+    userlocation.coordinates?.lat,
+    userlocation.coordinates?.lng,
     refetch,
   ]);
 
