@@ -53,7 +53,3 @@ export const PostProp = styled.div`
   justify-content: space-between;
   margin: 0 0.5rem;
 `;
-
-export const PostCommentWrapper = styled.div``;
-
-export const CommentWrapper = styled.div``;

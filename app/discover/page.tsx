@@ -26,6 +26,7 @@ import { loadPostsAPI } from "@/apis/posts";
 import MapBox from "@/components/Common/PostForm/MapBox";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import useGeoLocation from "@/hooks/useGeoLocation";
+import { MdDownloading } from "react-icons/md";
 
 const Discover = () => {
   const pathname = usePathname();
@@ -36,10 +37,6 @@ const Discover = () => {
 
   const location = searchParams.get("location");
   const term = searchParams.get("term");
-
-  // console.log(location, term);
-  console.log(userlocation);
-  // const { data: me, error } = useMyInfoQuery("");
 
   const { data } = useInfiniteQuery(
     ["posts"],
@@ -94,7 +91,7 @@ const Discover = () => {
                   <Post key={post.id} post={post} />
                 ))}
               </FeedContainer>
-              Add infinite scrolling
+              <MdDownloading />
             </LatestFeedContainer>
           </MainPosts>
         </MainContainer>

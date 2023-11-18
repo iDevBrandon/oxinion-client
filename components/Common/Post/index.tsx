@@ -1,20 +1,22 @@
 import React, { useCallback, useState } from "react";
 import { HiOutlineHeart } from "react-icons/hi";
-import { MdOutlineMoreHoriz } from "react-icons/md";
+import { MdComment, MdOutlineMoreHoriz } from "react-icons/md";
 import {
   PostWrapper,
   PostImage,
   PostDetails,
   ProfileWrapper,
   PostProp,
-  CommentWrapper,
-  PostCommentWrapper,
 } from "./styles";
 import useMyInfoQuery from "@/hooks/queries/useMyInfoQuery";
 import Popover from "./Popover";
 import { FcLike } from "react-icons/fc";
+import { Card, CardActions, CardContent, Typography } from "@mui/material";
+import Comments from "./comments/Comments";
+
 const Post = ({ post }: any) => {
   const [popoverOpen, setPopoverOpen] = useState(false);
+  const [commentFormOpen, setCommentFormOpen] = useState(false);
   const { data: user, error } = useMyInfoQuery();
   const [liked, setLiked] = useState(false);
   const popoverHandler = (e: any) => {
@@ -28,7 +30,7 @@ const Post = ({ post }: any) => {
   }, []);
 
   return (
-    <PostWrapper>
+    <Card>
       <PostImage onDoubleClick={onToggleLike}>
         <img src={post.images[0]} alt="post" />
       </PostImage>
@@ -55,30 +57,40 @@ const Post = ({ post }: any) => {
             </div>
           </div>
         </PostProp>
-        <div className="PostDesc">This is the first post</div>
 
-        <PostCommentWrapper>
-          <CommentWrapper>
-            <div>
-              <span>
-                <strong>devlife</strong>Comment 1
-              </span>
-            </div>
-            <div>
-              <span>
-                <strong>devlife</strong>Comment 1
-              </span>
-            </div>
-            <div>
-              <span>
-                <strong>devlife</strong>Comment 1
-              </span>
-            </div>
-          </CommentWrapper>
-          <div>Comment form</div>
-        </PostCommentWrapper>
+        <CardActions disableSpacing style={{ display: "flex" }}>
+          <div style={{ margin: "0 0.5rem" }}>
+            {liked ? (
+              <>
+                <FcLike onClick={onToggleLike} />
+                <small>0</small>
+              </>
+            ) : (
+              <>
+                <HiOutlineHeart onClick={onToggleLike} />
+                <small>0</small>
+              </>
+            )}
+          </div>
+          <div>
+            <MdComment />
+          </div>
+          <div onClick={popoverHandler}>
+            <MdOutlineMoreHoriz />
+            {popoverOpen && <Popover open={popoverOpen} />}
+          </div>
+        </CardActions>
+
+        <CardContent>
+          <Typography variant="body2" color="text.secondary">
+            This impressive paella is a perfect party dish and a fun meal to
+            cook together with your guests. Add 1 cup of frozen peas along with
+            the mussels, if you like.
+          </Typography>
+        </CardContent>
+        <Comments />
       </PostDetails>
-    </PostWrapper>
+    </Card>
   );
 };
 
