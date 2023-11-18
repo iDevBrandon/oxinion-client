@@ -9,3 +9,9 @@ export function loadPostsAPI(lastId?: number) {
 export function addPostAPI(data: any) {
   return api.post("/post", data).then((response) => response.data);
 }
+
+export function fetchNearbyPostsAPI(data: any) {
+  return api
+    .get(`/posts/nearby?lat=${data.lat}&lng=${data.lng}`)
+    .then((response) => response.data);
+}
