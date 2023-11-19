@@ -51,18 +51,21 @@ const PostForm = ({ open, handleClose }: any) => {
     },
   });
 
-  // const handleSubmit = useCallback(() => {
-  //   // Transform formData to match server expectations
-  //   const transformedFormData = {
-  //     description: formData.description,
-  //     imagePaths: formData.imagePaths,
-  //     location: {
-  //       coordinates: [formData.lng, formData.lat],
-  //     },
-  //   };
+  const handleSubmit = useCallback(() => {
+     const transformedFormData = {
+      location: {
+        type: "Point",
+        coordinates: [formData?.longitude, formData?.latitude],
+      },
+      images: formData.imagePaths,
+      description: formData.description,
+
+    };
+
+    console.log(transformedFormData)
   
-  //   mutate(transformedFormData);
-  // }, [formData, mutate]);
+    mutate(transformedFormData);
+  }, [formData, mutate]);
 
   console.log(formData);
 
@@ -121,6 +124,7 @@ const PostForm = ({ open, handleClose }: any) => {
                 onClick={() => {
                   if (page === steps.length - 1) {
                     console.log(formData);
+                    handleSubmit()
                   }
 
                   handleClose();
