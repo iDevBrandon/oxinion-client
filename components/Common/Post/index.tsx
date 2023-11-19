@@ -52,10 +52,6 @@ const Post = ({ post }: any) => {
           <PostImages images={post.images} />
         </PostImage>
 
-        {/* <div onDoubleClick={onToggleLike}>
-          <Image src={post.images[0]} alt="post" width="468" height="468" />
-        </div> */}
-
         <PostDetails>
           <PostProp>
             <ProfileWrapper>

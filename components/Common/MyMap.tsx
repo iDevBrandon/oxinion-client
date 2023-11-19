@@ -23,9 +23,9 @@ const Icon = icon({
 export function MapViewInitializer({ coords, formData }: any) {
   const map = useMap();
 
-  console.log(formData);
-  console.log(coords);
-  console.log([formData?.lat, formData?.lng]);
+  // console.log(formData);
+  // console.log(coords);
+  // console.log([formData?.lat, formData?.lng]);
 
   useEffect(() => {
     if (formData?.lat !== undefined && formData?.lng !== undefined) {
@@ -37,7 +37,7 @@ export function MapViewInitializer({ coords, formData }: any) {
 }
 
 function LocationSelector(props: any) {
-  console.log(props.formData);
+  // console.log(props.formData);
 
   const map = useMapEvents({
     click: (e) => {

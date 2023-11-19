@@ -5,8 +5,10 @@ const DetailsForm = ({ formData, setFormData }: any) => {
     <div>
       <input
         placeholder="What's going on here"
-        value={formData.desc  || ''}  
-        onChange={(e) => setFormData({ ...formData, desc: e.target.value })}
+        value={formData.description || ""}
+        onChange={(e) =>
+          setFormData({ ...formData, description: e.target.value })
+        }
       />
     </div>
   );

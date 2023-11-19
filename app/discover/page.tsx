@@ -27,10 +27,10 @@ import MapBox from "@/components/Common/PostForm/MapBox";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import useGeoLocation from "@/hooks/useGeoLocation";
 import { MdDownloading } from "react-icons/md";
+import { DEFAULT_LATITUDE, DEFAULT_LONGITUDE } from "@/constants/location";
 
 const Discover = () => {
-  const DEFAULT_LATITUDE = 51.509865;
-  const DEFAULT_LONGITUDE = -0.118092;
+  
   const pathname = usePathname();
   const searchParams = useSearchParams();
 

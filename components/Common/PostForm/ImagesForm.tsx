@@ -3,11 +3,15 @@ import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 
 const ImagesForm = ({ formData, setFormData }: any) => {
+  console.log(formData);
   const onDrop = useCallback((acceptedFiles: any) => {
     // Do something with the files
-    setFormData(acceptedFiles);
-    console.log(acceptedFiles);
+    setFormData({
+      ...formData,
+      imagePaths: acceptedFiles,
+    });
   }, []);
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (

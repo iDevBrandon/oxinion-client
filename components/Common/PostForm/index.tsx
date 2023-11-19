@@ -13,33 +13,56 @@ import {
   StepLabel,
   Stepper,
 } from "@mui/material";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import LocationForm from "./LocationForm";
 import ImagesForm from "./ImagesForm";
 import DetailsForm from "./DetailsForm";
 import { FormFooter, StyledButton, TransparentButton } from "./styles";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { addPostAPI } from "@/apis/posts";
+import { AxiosError } from "axios";
+import { DEFAULT_LATITUDE, DEFAULT_LONGITUDE } from "@/constants/location";
 
 const PostForm = ({ open, handleClose }: any) => {
+  const queryClient = useQueryClient();
+
   interface FormData {
     latitude: number;
     longitude: number;
     imagePaths: string[];
-    desc: string;
+    description: string;
   }
 
   const [page, setPage] = useState(0);
   const [formData, setFormData] = useState<FormData>({
-    latitude: 0,
-    longitude: 0,
+    latitude: DEFAULT_LATITUDE,
+    longitude: DEFAULT_LONGITUDE,
     imagePaths: [],
-    desc: "",
+    description: "",
   });
-  const handleSubmit = useCallback((e: any) => {
-    e.preventDefault();
 
-    console.log("submitted post");
-  }, []);
+  const { mutate, isLoading } = useMutation(addPostAPI, {
+    onSuccess: () => {
+      queryClient.refetchQueries(["posts"]);
+    },
+    onError: (e: AxiosError) => {
+      alert(e.response?.data);
+    },
+  });
+
+  // const handleSubmit = useCallback(() => {
+  //   // Transform formData to match server expectations
+  //   const transformedFormData = {
+  //     description: formData.description,
+  //     imagePaths: formData.imagePaths,
+  //     location: {
+  //       coordinates: [formData.lng, formData.lat],
+  //     },
+  //   };
+  
+  //   mutate(transformedFormData);
+  // }, [formData, mutate]);
 
   console.log(formData);
 
@@ -48,11 +71,12 @@ const PostForm = ({ open, handleClose }: any) => {
     if (page === 0) {
       return <LocationForm formData={formData} setFormData={setFormData} />;
     } else if (page === 1) {
-      return <ImagesForm formData={formData} setFormData={setFormData}/>
-        } else {
+      return <ImagesForm formData={formData} setFormData={setFormData} />;
+    } else {
       return <DetailsForm formData={formData} setFormData={setFormData} />;
     }
   };
+
   return (
     <div>
       <Dialog
@@ -95,8 +119,10 @@ const PostForm = ({ open, handleClose }: any) => {
             {page === steps.length - 1 ? (
               <StyledButton
                 onClick={() => {
-                  if (page === steps.length - 1) console.log(formData);
-                  // dispatch(addPost(formData));
+                  if (page === steps.length - 1) {
+                    console.log(formData);
+                  }
+
                   handleClose();
                 }}
               >
