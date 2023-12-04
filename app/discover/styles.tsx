@@ -78,6 +78,8 @@ export const ContentsContainer = styled.div`
   }
 `;
 
+export const ContentsSection = styled.div``;
+
 export const FeaturedContainer = styled.div`
   @media (min-width: 768px) {
     padding: 0 10rem;

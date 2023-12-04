@@ -17,6 +17,7 @@ import { FaHandshakeSimple } from "react-icons/fa6";
 import { FaSearchLocation } from "react-icons/fa";
 import Link from "next/link";
 import { RiPriceTag3Line } from "react-icons/ri";
+import { BsFire } from "react-icons/bs";
 import { useRouter } from "next/navigation";
 
 const Hero = () => {
@@ -65,8 +66,11 @@ const Hero = () => {
                 <Link href="/discover">Discover</Link>
               </li>
               <li>
-                <FaHandshakeSimple />
-                <Link href="/rent">Rent</Link>
+                {/* <FaHandshakeSimple /> */}
+                <BsFire />
+
+                <Link href="/trends">Trends</Link>
+                {/* <Link href="/rent">Rent</Link> */}
               </li>
               <li>
                 <TbPlaneDeparture />

@@ -43,14 +43,12 @@ const Post = ({ post }: any) => {
     setCommentFormOpen((prev) => !prev);
   }, []);
 
-  console.log(post);
-
   return (
     <PostWrapper>
       <Card>
-        <PostImage onDoubleClick={onToggleLike}>
+        <PostImageWrapper onDoubleClick={onToggleLike}>
           <PostImages images={post.images} />
-        </PostImage>
+        </PostImageWrapper>
 
         <PostDetails>
           <PostProp>
