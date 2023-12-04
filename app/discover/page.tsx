@@ -28,6 +28,10 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import useGeoLocation from "@/hooks/useGeoLocation";
 import { MdDownloading } from "react-icons/md";
 import { DEFAULT_LATITUDE, DEFAULT_LONGITUDE } from "@/constants/location";
+import { useBreakpoint } from "@/hooks/useBreakPoint";
+import { GiProtectionGlasses } from "react-icons/gi";
+import { ARButton, DynamicIsland } from "@/components/Common/styles";
+import Image from "next/image";
 
 const Discover = () => {
   const pathname = usePathname();
@@ -70,9 +74,36 @@ const Discover = () => {
     refetch,
   ]);
 
+  const { isMobile, isTablet } = useBreakpoint();
+
   return (
     <DiscoverContainer>
       <ContentsContainer>
+        <div>
+          {isMobile && (
+            <DynamicIsland>
+              <ARButton
+                style={{
+                  position: "relative",
+                  width: "250px",
+                  paddingBottom: "100px",
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                }}
+                onClick={() => router.push("/discover/ar.html")}
+              >
+                <Image
+                  src="/images/view_in_ar.png"
+                  alt="View in AR"
+                  layout="fill"
+                  objectFit="contain"
+                  priority
+                />
+              </ARButton>
+            </DynamicIsland>
+          )}
+        </div>
+
         <LocationHeader>
           <div className="icon-container">
             <div className="header-icon">
@@ -84,7 +115,6 @@ const Discover = () => {
             <h3>in {location || "somewhere"}</h3>
           </div>
         </LocationHeader>
-
         <MainContainer>
           <MainMap>
             {userlocation.loaded ? (

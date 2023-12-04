@@ -142,3 +142,7 @@ export const StyledButton = styled.button`
     }
   }
 `;
+
+export const DynamicIsland = styled.div``;
+
+export const ARButton = styled.div``;

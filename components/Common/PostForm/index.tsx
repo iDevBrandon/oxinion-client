@@ -36,6 +36,7 @@ const PostForm = ({ open, handleClose }: any) => {
 
   const [page, setPage] = useState(0);
   const [formData, setFormData] = useState<FormData>({
+    // userId: me._id,
     latitude: DEFAULT_LATITUDE,
     longitude: DEFAULT_LONGITUDE,
     imagePaths: [],
@@ -119,18 +120,24 @@ const PostForm = ({ open, handleClose }: any) => {
             </TransparentButton>
 
             {page === steps.length - 1 ? (
-              <StyledButton
-                onClick={() => {
-                  if (page === steps.length - 1) {
-                    console.log(formData);
-                    handleSubmit();
-                  }
+              <div>
+                {formData.description === "" ? (
+                  <div>Disabled</div>
+                ) : (
+                  <StyledButton
+                    onClick={() => {
+                      if (page === steps.length - 1) {
+                        console.log(formData);
+                        handleSubmit();
+                      }
 
-                  handleClose();
-                }}
-              >
-                <span>Submit</span>
-              </StyledButton>
+                      handleClose();
+                    }}
+                  >
+                    <span>Submit</span>
+                  </StyledButton>
+                )}
+              </div>
             ) : (
               <>
                 {formData.latitude === 0 ? (
