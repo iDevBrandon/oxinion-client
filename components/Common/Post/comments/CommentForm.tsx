@@ -35,7 +35,7 @@ const CommentForm = ({ post }: any) => {
         return alert("Please write a comment");
       }
 
-      me && mutate({ text: commentText, postId: post._id, author: me._id });
+      me && mutate({ content: commentText, postId: post._id, author: me._id });
 
       if (!me) {
         alert("Please log in first!");

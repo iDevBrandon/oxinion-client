@@ -19,7 +19,7 @@ export function fetchNearbyPostsAPI(data: any) {
 // POST /post/1/comment
 export function addCommentAPI(data: {
   postId: number;
-  text: string;
+  content: string;
   author: string;
 }) {
   return api

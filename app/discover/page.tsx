@@ -30,7 +30,6 @@ import { MdDownloading } from "react-icons/md";
 import { DEFAULT_LATITUDE, DEFAULT_LONGITUDE } from "@/constants/location";
 
 const Discover = () => {
-  
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -42,22 +41,6 @@ const Discover = () => {
 
   const userLat = Number(userlocation?.coordinates?.lat) || DEFAULT_LATITUDE;
   const userLng = Number(userlocation?.coordinates?.lng) || DEFAULT_LONGITUDE;
-
-  console.log(userLat, userLng);
-
-  // const { data } = useInfiniteQuery(
-  //   ["posts"],
-  //   ({ pageParam = "" }) => loadPostsAPI(pageParam),
-  //   {
-  //     getNextPageParam: (lastPage) => {
-  //       return lastPage;
-  //     },
-  //   }
-  // );
-
-  // if (!data) return <></>;
-
-  // const posts = data?.pages[0].posts;
 
   const { data, refetch } = useInfiniteQuery(
     ["posts"],
@@ -86,8 +69,6 @@ const Discover = () => {
     userlocation.coordinates?.lng,
     refetch,
   ]);
-
-  console.log(data?.pages[0]);
 
   return (
     <DiscoverContainer>
