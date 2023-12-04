@@ -49,10 +49,12 @@ const LocationForm = ({ formData, setFormData }: any) => {
           <small>Latitude</small>
           <input
             placeholder="Lat"
-            value={formData?.latitude?.toFixed(4) || DEFAULT_LATITUDE}
+            value={formData?.latitude?.toFixed(4) || DEFAULT_LATITUDE }
             onChange={(e) =>
               setFormData({ ...formData, latitude: e.target.value })
             }
+            readOnly
+            required
           />
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
@@ -63,6 +65,8 @@ const LocationForm = ({ formData, setFormData }: any) => {
             onChange={(e) =>
               setFormData({ ...formData, longitude: e.target.value })
             }
+            readOnly
+            required
           />
         </div>
       </div>

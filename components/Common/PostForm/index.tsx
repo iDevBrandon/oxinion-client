@@ -52,18 +52,17 @@ const PostForm = ({ open, handleClose }: any) => {
   });
 
   const handleSubmit = useCallback(() => {
-     const transformedFormData = {
+    const transformedFormData = {
       location: {
         type: "Point",
         coordinates: [formData?.longitude, formData?.latitude],
       },
       images: formData.imagePaths,
       description: formData.description,
-
     };
 
-    console.log(transformedFormData)
-  
+    console.log(transformedFormData);
+
     mutate(transformedFormData);
   }, [formData, mutate]);
 
@@ -124,7 +123,7 @@ const PostForm = ({ open, handleClose }: any) => {
                 onClick={() => {
                   if (page === steps.length - 1) {
                     console.log(formData);
-                    handleSubmit()
+                    handleSubmit();
                   }
 
                   handleClose();
@@ -133,9 +132,20 @@ const PostForm = ({ open, handleClose }: any) => {
                 <span>Submit</span>
               </StyledButton>
             ) : (
-              <StyledButton onClick={() => setPage(page + 1)} color="primary">
-                <span>Next</span>
-              </StyledButton>
+              <>
+                {formData.latitude === 0 ? (
+                  "Click Map"
+                ) : (
+                  <>
+                    <StyledButton
+                      onClick={() => setPage(page + 1)}
+                      color="primary"
+                    >
+                      <span>Next</span>
+                    </StyledButton>
+                  </>
+                )}
+              </>
             )}
           </FormFooter>
         </div>

@@ -10,7 +10,7 @@ const PostImages = ({ images }: any) => {
   return (
     <>
       <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
-        {images.map((img: any) => {
+        {images?.map((img: any) => {
           return (
             <SwiperSlide key={img}>
               <PostImageItem>
