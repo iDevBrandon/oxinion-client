@@ -23,17 +23,17 @@ const ProfilePage = () => {
         <li>
           <small>Post</small>
           <br />
-          <small>1</small>
+          <small>{me?.posts.length}</small>
         </li>
         <li>
           <small>Followers</small>
           <br />
-          <small>12</small>
+          <small>{me?.followers.length}</small>{" "}
         </li>
         <li>
           <small>Followings</small>
           <br />
-          <small>31</small>
+          <small>{me?.followings?.length}</small>{" "}
         </li>
       </ProfileCard>
     </div>

@@ -17,8 +17,12 @@ export function fetchNearbyPostsAPI(data: any) {
 }
 
 // POST /post/1/comment
-export function addCommentAPI(data: any) {
+export function addCommentAPI(data: {
+  postId: number;
+  text: string;
+  author: string;
+}) {
   return api
-    .post(`/${data.postId}/comment`, data)
+    .post(`/post/${data.postId}/comment`, data)
     .then((response) => response.data);
 }
