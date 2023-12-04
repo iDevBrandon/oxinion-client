@@ -7,7 +7,6 @@ import { Pagination } from "swiper/modules";
 import { PostImageItem } from "./styles";
 
 const PostImages = ({ images }: any) => {
-  console.log(images);
   return (
     <>
       <Swiper pagination={true} modules={[Pagination]} className="mySwiper">

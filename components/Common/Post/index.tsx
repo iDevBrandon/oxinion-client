@@ -24,6 +24,7 @@ import {
 import Comments from "./comments/Comments";
 import Image from "next/image";
 import PostImages from "./PostImages";
+import PostCardContent from "./PostCardContent";
 
 const Post = ({ post }: any) => {
   const [popoverOpen, setPopoverOpen] = useState(false);
@@ -87,12 +88,12 @@ const Post = ({ post }: any) => {
               </CardActions>
             </CardActionWrapper>
           </PostProp>
-
-          <CardContent>
+          <PostCardContent postData={post.description} />
+          {/* <CardContent>
             <Typography variant="body2" color="text.secondary">
               {post.description}
             </Typography>
-          </CardContent>
+          </CardContent> */}
           <Divider />
           {commentFormOpen && <Comments post={post} />}
         </PostDetails>
