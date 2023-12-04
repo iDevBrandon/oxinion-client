@@ -35,7 +35,8 @@ const LoginForm = () => {
       alert(error.response?.data);
     },
     onSuccess: async () => {
-      queryClient.refetchQueries(["user"]);
+      // queryClient.refetchQueries(["user"]);
+      queryClient.invalidateQueries(["user"]);
     },
   });
 
