@@ -29,6 +29,7 @@ module.exports = {
   },
   images: {
     domains: [
+      "https://api.oxinion.com/",
       "img.freepik.com",
       "img.cjnews.cj.net",
       "source.unsplash.com",
