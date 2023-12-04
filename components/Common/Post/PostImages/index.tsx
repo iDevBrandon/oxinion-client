@@ -10,12 +10,20 @@ const PostImages = ({ images }: any) => {
   return (
     <>
       <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
-        {images?.map((img: any) => {
+        {images?.map((img: any, index: any) => {
           return (
-            <SwiperSlide key={img}>
-              <PostImageItem>
-                <Image src={img} alt={"by user"} fill />
-              </PostImageItem>
+            <SwiperSlide key={index}>
+              <div style={{ height: "470px" }}>
+                <Image
+                  src={img}
+                  alt="content"
+                  width={0}
+                  height={0}
+                  sizes="100vw"
+                  style={{ width: "100%", height: "auto" }}
+                  objectFit="cover"
+                />
+              </div>
             </SwiperSlide>
           );
         })}
