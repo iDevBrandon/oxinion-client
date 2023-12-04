@@ -7,6 +7,8 @@ import useMyInfoQuery from "@/hooks/queries/useMyInfoQuery";
 const ProfilePage = () => {
   const { data: me } = useMyInfoQuery();
 
+  console.log(me);
+
   return (
     <div>
       <Image
@@ -15,7 +17,7 @@ const ProfilePage = () => {
         width="200"
         height="200"
       />
-      <h2>iDevBrandon</h2>
+      <h2>{me?.username}</h2>
 
       <ProfileCard>
         <li>

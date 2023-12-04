@@ -15,3 +15,10 @@ export function fetchNearbyPostsAPI(data: any) {
     .get(`/posts/nearby?lat=${data.lat}&lng=${data.lng}`)
     .then((response) => response.data);
 }
+
+// POST /post/1/comment
+export function addCommentAPI(data: any) {
+  return api
+    .post(`/${data.postId}/comment`, data)
+    .then((response) => response.data);
+}
