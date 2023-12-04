@@ -3,24 +3,47 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>OXINION GeoAR</title>
-    <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
-    <script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
-    <script>
-      THREEx.ArToolkitContext.baseURL =
-        "https://raw.githack.com/jeromeetienne/ar.js/master/three.js/";
-    </script>
-    <script type="module" src="./script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
   </head>
 
   <body style="margin: 0; overflow: hidden">
     <a-scene
-      vr-mode-ui="enabled: false"
       embedded
-      arjs="sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;"
+      loading-screen="enabled: false;"
+      arjs="sourceType: webcam; debugUIEnabled: false;"
     >
-      <a-camera gps-camera="minDistance: 40;" rotation-reader></a-camera>
+      <a-camera gps-camera rotation-reader></a-camera>
     </a-scene>
+    <script>
+      navigator.geolocation.getCurrentPosition(function (position) {
+        var lat = position.coords.latitude;
+        var lng = position.coords.longitude;
+        //Make API call to Oxinion
+        fetch(`https://api.oxinion.com/api/posts/nearby?lng=${lng}&lat=${lat}`)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("====================================");
+            console.log(data);
+            console.log("====================================");
+            //Loop through the array of posts returned by the API
+            data.forEach((post) => {
+              //Create an <a-image> element for each post
+              let image = document.createElement("a-image");
+              image.setAttribute("src", post.images[0]);
+              image.setAttribute("look-at", "[gps-camera]");
+              image.setAttribute("scale", "1 1 1");
+              image.setAttribute(
+                "gps-entity-place",
+                `latitude: ${post.location.coordinates[1]}; longitude: ${post.location.coordinates[0]}`
+              );
+              //Append the <a-image> element to the <a-scene>
+              document.querySelector("a-scene").appendChild(image);
+            });
+          })
+          .catch((error) => console.error(error));
+      });
+    </script>
   </body>
 </html>
