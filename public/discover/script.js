@@ -25,7 +25,7 @@ async function loadPlaces(position) {
   const corsProxy = "https://cors-anywhere.herokuapp.com/";
 
   // Foursquare API (limit param: number of maximum places to fetch)
-  const endpoint = `${corsProxy}https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBFuyuEKhp8ScTENqkfVCtFUNqkAjeuomM&location=${coords.coords.latitude},${coords.coords.longitude}&radius=500000`;
+  const endpoint = `${corsProxy}https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&location=${coords.coords.latitude},${coords.coords.longitude}&radius=500000`;
 
   return fetch(endpoint)
     .then((data) => {
