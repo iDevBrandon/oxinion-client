@@ -1,6 +1,6 @@
 import { Paper } from "@mui/material";
 import React, { useCallback } from "react";
-import { useDropzone } from "react-dropzone";
+import { useDropzone, FileWithPath } from "react-dropzone";
 
 const ImagesForm = ({ formData, setFormData }: any) => {
   console.log(formData);
@@ -8,14 +8,44 @@ const ImagesForm = ({ formData, setFormData }: any) => {
     // Do something with the files
     setFormData({
       ...formData,
-      imagePaths: acceptedFiles,
+      images: acceptedFiles,
     });
   }, []);
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const {
+    acceptedFiles,
+    fileRejections,
+    getRootProps,
+    getInputProps,
+    isDragActive,
+  } = useDropzone({
+    onDrop,
+    accept: {
+      "image/*": [".jpeg", ".jpg", ".png"],
+    },
+  });
+
+  const acceptedFileItems = acceptedFiles.map((file: FileWithPath) => (
+    <li key={file.path}>
+      {file.path} - {file.size} bytes
+    </li>
+  ));
+
+  const fileRejectionItems = fileRejections.map(({ file, errors }: any) => (
+    <li key={file.path}>
+      {file.path} - {file.size} bytes
+      <ul>
+        {errors.map((e: any) => (
+          <li key={e.code}>{e.message} Not Supported.</li>
+        ))}
+      </ul>
+    </li>
+  ));
 
   return (
     <div>
+      {formData.images?.length > 0 && <div>File uploaded successfully!</div>}
+
       <Paper
         sx={{
           cursor: "pointer",
@@ -25,6 +55,8 @@ const ImagesForm = ({ formData, setFormData }: any) => {
           "&:hover": { border: "1px solid #ccc" },
         }}
       >
+        <div>{fileRejectionItems}</div>
+
         <div style={{ padding: "16px" }} {...getRootProps()}>
           <input {...getInputProps()} />
           {isDragActive ? (

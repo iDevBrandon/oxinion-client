@@ -8,6 +8,8 @@ const LocationForm = ({ formData, setFormData }: any) => {
   // console.log("xyzlat: " + formData.lng);
   const [isLocationGranted, setIsLocationGranted] = useState(false);
 
+  console.log(formData);
+
   // Check geolocation permission on component mount
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -16,7 +18,6 @@ const LocationForm = ({ formData, setFormData }: any) => {
         (position) => {
           // Geolocation permission is granted
           setIsLocationGranted(true);
-           
         },
         (error) => {
           // Geolocation permission is not granted
@@ -29,18 +30,8 @@ const LocationForm = ({ formData, setFormData }: any) => {
     }
   }, []);
 
- 
-
   return (
     <div>
-      {/* {isLocationGranted ? (
-        <p></p>
-      ) : (
-        <p>
-          Your location permission is not granted. Please enable it in your
-          browser settings.
-        </p>
-      )} */}
       <div id="map">
         <ShowMap formData={formData} setFormData={setFormData} />
       </div>
@@ -49,7 +40,7 @@ const LocationForm = ({ formData, setFormData }: any) => {
           <small>Latitude</small>
           <input
             placeholder="Lat"
-            value={formData?.latitude?.toFixed(4) || DEFAULT_LATITUDE }
+            value={formData?.latitude?.toFixed(4) || DEFAULT_LATITUDE}
             onChange={(e) =>
               setFormData({ ...formData, latitude: e.target.value })
             }

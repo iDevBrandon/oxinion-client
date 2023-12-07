@@ -20,8 +20,8 @@ Add "REACT_APP_MAPBOX" to .env file
 <https://curryyou.tistory.com/501>
 
 proxy
-for local "proxy": "http://localhost:8800/v1"
-for prod "proxy": "https://oxinion.herokuapp.com/v1"
+for local "proxy": "<http://localhost:8800/v1>"
+for prod "proxy": "<https://oxinion.herokuapp.com/v1>"
 
 Problem : I would like to help business owner who want to gather people around thier busienss locations.
 recommendations of business listings.

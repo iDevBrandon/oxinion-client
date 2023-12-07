@@ -23,6 +23,14 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addPostAPI } from "@/apis/posts";
 import { AxiosError } from "axios";
 import { DEFAULT_LATITUDE, DEFAULT_LONGITUDE } from "@/constants/location";
+import { storage } from "@/firebase/config";
+import {
+  ref,
+  uploadBytes,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
+import { v4 } from "uuid";
 
 const PostForm = ({ open, handleClose }: any) => {
   const queryClient = useQueryClient();
@@ -30,7 +38,7 @@ const PostForm = ({ open, handleClose }: any) => {
   interface FormData {
     latitude: number;
     longitude: number;
-    imagePaths: string[];
+    images: any;
     description: string;
   }
 
@@ -39,7 +47,7 @@ const PostForm = ({ open, handleClose }: any) => {
     // userId: me._id,
     latitude: DEFAULT_LATITUDE,
     longitude: DEFAULT_LONGITUDE,
-    imagePaths: [],
+    images: [],
     description: "",
   });
 
@@ -58,7 +66,7 @@ const PostForm = ({ open, handleClose }: any) => {
         type: "Point",
         coordinates: [formData?.longitude, formData?.latitude],
       },
-      images: formData.imagePaths,
+      images: formData.images,
       description: formData.description,
     };
 
@@ -67,7 +75,9 @@ const PostForm = ({ open, handleClose }: any) => {
     mutate(transformedFormData);
   }, [formData, mutate]);
 
-  console.log(formData);
+  // useEffect(() => {
+  //   console.log(formData); // Log the updated state when it changes
+  // }, [formData]);
 
   const steps = ["Location", "Images", "Details"];
   const PageDisplay = () => {
@@ -111,23 +121,83 @@ const PostForm = ({ open, handleClose }: any) => {
             {PageDisplay()}
           </div>
           <FormFooter>
-            <TransparentButton
-              style={{ outline: "none" }}
-              disabled={page == 0}
-              onClick={() => setPage(page - 1)}
-            >
-              <span>Back</span>
-            </TransparentButton>
+            {/* Location form page */}
 
-            {page === steps.length - 1 ? (
+            {page === 0 && (
+              <div style={{ outline: "none", display: "flex" }}>
+                {/* <span>Back</span> */}
+                <StyledButton onClick={() => setPage(page + 1)} color="primary">
+                  <span>Next</span>
+                </StyledButton>
+              </div>
+            )}
+
+            {/* Images form page */}
+
+            {page === 1 && (
               <div>
-                {formData.description === "" ? (
-                  <div>Disabled</div>
+                {formData.images?.length > 0 ? (
+                  <StyledButton
+                    onClick={async () => {
+                      const updatedUrls = await Promise.all(
+                        formData.images.map(async (image: any) => {
+                          try {
+                            const imageRef = ref(
+                              storage,
+                              `/images/${image.path + v4()}`
+                            );
+
+                            const metadata = {
+                              contentType: "image/jpeg",
+                            };
+
+                            // Upload the image
+                            await uploadBytes(imageRef, image.path, metadata);
+
+                            console.log("Uploaded a blob or file!");
+
+                            // Get the download URL for the image
+                            const url = await getDownloadURL(imageRef);
+
+                            return url;
+                          } catch (error) {
+                            console.error("Error during image upload:", error);
+                            return null;
+                          }
+                        })
+                      );
+
+                      // Remove null values (in case of errors during upload)
+                      const filteredUrls = updatedUrls.filter(
+                        (url) => url !== null
+                      );
+
+                      const updatedFormData = {
+                        ...formData,
+                        images: filteredUrls,
+                      };
+
+                      setFormData(updatedFormData);
+
+                      setPage(page + 1);
+                    }}
+                  >
+                    <span>Next</span>
+                  </StyledButton>
+                ) : (
+                  <p>Please upload your images</p>
+                )}
+              </div>
+            )}
+
+            {page === 2 && (
+              <div>
+                {formData?.description === "" ? (
+                  <div>Say something!</div>
                 ) : (
                   <StyledButton
                     onClick={() => {
                       if (page === steps.length - 1) {
-                        console.log(formData);
                         handleSubmit();
                       }
 
@@ -138,21 +208,6 @@ const PostForm = ({ open, handleClose }: any) => {
                   </StyledButton>
                 )}
               </div>
-            ) : (
-              <>
-                {formData.latitude === 0 ? (
-                  "Click Map"
-                ) : (
-                  <>
-                    <StyledButton
-                      onClick={() => setPage(page + 1)}
-                      color="primary"
-                    >
-                      <span>Next</span>
-                    </StyledButton>
-                  </>
-                )}
-              </>
             )}
           </FormFooter>
         </div>
