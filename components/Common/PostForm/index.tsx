@@ -68,7 +68,7 @@ const PostForm = ({ open, handleClose }: any) => {
     const transformedFormData = {
       location: {
         type: "Point",
-      coordinates: [formData?.lng, formData?.lat], // Use lng and lat
+        coordinates: [formData?.lng, formData?.lat], // Use lng and lat
       },
       images: formData.images,
       description: formData.description,
@@ -78,10 +78,6 @@ const PostForm = ({ open, handleClose }: any) => {
 
     mutate(transformedFormData);
   }, [formData, mutate]);
-
-  // useEffect(() => {
-  //   console.log(formData); // Log the updated state when it changes
-  // }, [formData]);
 
   const steps = ["Location", "Images", "Details"];
   const PageDisplay = () => {
@@ -143,12 +139,12 @@ const PostForm = ({ open, handleClose }: any) => {
                 {formData.images?.length > 0 ? (
                   <StyledButton
                     onClick={async () => {
-                      const updatedUrls = await Promise.all(
-                        formData.images.map(async (image: any) => {
-                          try {
+                      try {
+                        const updatedUrls = await Promise.all(
+                          formData.images.map(async (image: any) => {
                             const imageRef = ref(
                               storage,
-                              `/images/${image.path + v4()}`
+                              `/images/${image.name + v4()}`
                             );
 
                             const metadata = {
@@ -156,34 +152,30 @@ const PostForm = ({ open, handleClose }: any) => {
                             };
 
                             // Upload the image
-                            await uploadBytes(imageRef, image.path, metadata);
-
-                            console.log("Uploaded a blob or file!");
+                            await uploadBytes(imageRef, image, metadata);
 
                             // Get the download URL for the image
                             const url = await getDownloadURL(imageRef);
+                            console.log("Image URL:", url); // Log the URL
 
                             return url;
-                          } catch (error) {
-                            console.error("Error during image upload:", error);
-                            return null;
-                          }
-                        })
-                      );
+                          })
+                        );
 
-                      // Remove null values (in case of errors during upload)
-                      const filteredUrls = updatedUrls.filter(
-                        (url) => url !== null
-                      );
+                        // Filter out null or undefined URLs
+                        const filteredUrls = updatedUrls.filter((url) => url);
 
-                      const updatedFormData = {
-                        ...formData,
-                        images: filteredUrls,
-                      };
+                        // Update form data with the URLs
+                        setFormData((prevData) => ({
+                          ...prevData,
+                          images: filteredUrls,
+                        }));
 
-                      setFormData(updatedFormData);
-
-                      setPage(page + 1);
+                        // Move to the next page
+                        setPage(page + 1);
+                      } catch (error) {
+                        console.error("Error during image upload:", error);
+                      }
                     }}
                   >
                     <span>Next</span>
