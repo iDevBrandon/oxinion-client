@@ -3,12 +3,10 @@ import ShowMap from "../ShowMap";
 import { DEFAULT_LATITUDE, DEFAULT_LONGITUDE } from "@/constants/location";
 
 const LocationForm = ({ formData, setFormData }: any) => {
-  // console.log(formData);
-  // console.log("abclat: " + formData.lat);
-  // console.log("xyzlat: " + formData.lng);
-  const [isLocationGranted, setIsLocationGranted] = useState(false);
-
   console.log(formData);
+  console.log("abclat: " + formData.lat);
+  console.log("xyzlat: " + formData.lng);
+  const [isLocationGranted, setIsLocationGranted] = useState(false);
 
   // Check geolocation permission on component mount
   useEffect(() => {
@@ -40,9 +38,9 @@ const LocationForm = ({ formData, setFormData }: any) => {
           <small>Latitude</small>
           <input
             placeholder="Lat"
-            value={formData?.latitude?.toFixed(4) || DEFAULT_LATITUDE}
+            value={formData?.lat?.toFixed(4) || ""}
             onChange={(e) =>
-              setFormData({ ...formData, latitude: e.target.value })
+              setFormData({ ...formData, latitude: parseFloat(e.target.value) })
             }
             readOnly
             required
@@ -52,9 +50,12 @@ const LocationForm = ({ formData, setFormData }: any) => {
           <small>Longitude</small>
           <input
             placeholder="Lng"
-            value={formData?.longitude?.toFixed(4) || DEFAULT_LONGITUDE}
+            value={formData?.lng?.toFixed(4) || ""}
             onChange={(e) =>
-              setFormData({ ...formData, longitude: e.target.value })
+              setFormData({
+                ...formData,
+                longitude: parseFloat(e.target.value),
+              })
             }
             readOnly
             required

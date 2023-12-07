@@ -36,13 +36,13 @@ export function MapViewInitializer({ coords, formData }: any) {
   return null;
 }
 
-function LocationSelector(props: any) {
+function LocationSelector({ map, setFormData }: any) {
   // console.log(props.formData);
 
-  const map = useMapEvents({
+  const mapEvents = useMapEvents({
     click: (e) => {
-      // setFormData(e.latlng)
-      props.setFormData(e.latlng);
+      setFormData(e.latlng)
+      // props.setFormData(e.latlng);
       // map.flyTo(e.latlng, map.getZoom());
       map.locate();
     },

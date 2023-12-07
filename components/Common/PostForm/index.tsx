@@ -36,8 +36,8 @@ const PostForm = ({ open, handleClose }: any) => {
   const queryClient = useQueryClient();
 
   interface FormData {
-    latitude: number;
-    longitude: number;
+    lat: number;
+    lng: number;
     images: any;
     description: string;
   }
@@ -45,8 +45,8 @@ const PostForm = ({ open, handleClose }: any) => {
   const [page, setPage] = useState(0);
   const [formData, setFormData] = useState<FormData>({
     // userId: me._id,
-    latitude: DEFAULT_LATITUDE,
-    longitude: DEFAULT_LONGITUDE,
+    lat: DEFAULT_LATITUDE,
+    lng: DEFAULT_LONGITUDE,
     images: [],
     description: "",
   });
@@ -60,11 +60,15 @@ const PostForm = ({ open, handleClose }: any) => {
     },
   });
 
+  useEffect(() => {
+    console.log(formData); // Log the updated state when it changes
+  }, [formData]);
+
   const handleSubmit = useCallback(() => {
     const transformedFormData = {
       location: {
         type: "Point",
-        coordinates: [formData?.longitude, formData?.latitude],
+      coordinates: [formData?.lng, formData?.lat], // Use lng and lat
       },
       images: formData.images,
       description: formData.description,
