@@ -84,7 +84,7 @@ const Post = ({ post }: any) => {
                 </div>
                 <div onClick={popoverHandler}>
                   <MdOutlineMoreHoriz />
-                  {popoverOpen && <Popover open={popoverOpen} />}
+                  {popoverOpen && <Popover open={popoverOpen} post={post} />}
                 </div>
               </CardActions>
             </CardActionWrapper>

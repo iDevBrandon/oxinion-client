@@ -30,5 +30,5 @@ export function addCommentAPI(data: {
 // Remove a post
 // DELETE http://localhost:8800/api/posts/656de58033a404f5cadb7606
 export function removePostAPI(data: string) {
-  return api.delete(`/posts/${data}`).then((response) => response.data);
+  return api.delete(`/post/${data}`).then((response) => response.data);
 }

@@ -21,8 +21,7 @@ const PostImages = ({ images }: any) => {
                   height={0}
                   sizes="100vw"
                   style={{ width: "100%", height: "auto" }}
-                  objectFit="cover"
-                />
+                 />
               </div>
             </SwiperSlide>
           );

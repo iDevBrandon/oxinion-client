@@ -96,8 +96,7 @@ const Discover = () => {
                   src="/images/view_in_ar.png"
                   alt="View in AR"
                   layout="fill"
-                  objectFit="contain"
-                  priority
+                   priority
                 />
               </ARButton>
             </DynamicIsland>

@@ -12,7 +12,7 @@ const Featured = () => {
           width={0}
           height={0}
           sizes="100vw"
-          style={{ width: "100%", height: "auto", objectFit:"cover" }}
+          style={{ width: "100%", height: "auto",   }}
         />
       </FeaturedItem>
 
@@ -23,7 +23,7 @@ const Featured = () => {
           width={0}
           height={0}
           sizes="100vw"
-          style={{ width: "100%", height: "auto", objectFit:"cover" }}
+          style={{ width: "100%", height: "auto",  }}
         />
       </FeaturedItem>
 
@@ -35,8 +35,7 @@ const Featured = () => {
           height={0}
           sizes="100vw"
           style={{ width: "100%", height: "auto" }}
-          objectFit="cover"
-        />
+         />
       </FeaturedItem>
 
       <FeaturedItem>
@@ -47,8 +46,7 @@ const Featured = () => {
           height={0}
           sizes="100vw"
           style={{ width: "100%", height: "auto" }}
-          objectFit="cover"
-        />
+         />
       </FeaturedItem>
 
       <FeaturedItem>
@@ -59,8 +57,7 @@ const Featured = () => {
           height={0}
           sizes="100vw"
           style={{ width: "100%", height: "auto" }}
-          objectFit="cover"
-        />
+         />
       </FeaturedItem>
 
       <FeaturedItem>
@@ -71,8 +68,7 @@ const Featured = () => {
           height={0}
           sizes="100vw"
           style={{ width: "100%", height: "auto" }}
-          objectFit="cover"
-        />
+         />
       </FeaturedItem>
     </FeaturedList>
   );

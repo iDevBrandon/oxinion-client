@@ -60,9 +60,9 @@ const PostForm = ({ open, handleClose }: any) => {
     },
   });
 
-  useEffect(() => {
-    console.log(formData); // Log the updated state when it changes
-  }, [formData]);
+  // useEffect(() => {
+  //   console.log(formData); // Log the updated state when it changes
+  // }, [formData]);
 
   const handleSubmit = useCallback(() => {
     const transformedFormData = {
