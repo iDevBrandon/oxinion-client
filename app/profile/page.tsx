@@ -1,43 +1,24 @@
-"use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { ProfileCard } from "./styles";
 import Image from "next/image";
 import useMyInfoQuery from "@/hooks/queries/useMyInfoQuery";
+import { headers } from "next/headers";
+import ProfilePage from "./page.client";
+import { loadMyInfoAPI } from "@/apis/auth";
+import { redirect } from "next/navigation";
 
-const ProfilePage = () => {
-  const { data: me } = useMyInfoQuery();
+const Page = async () => {
+  const header = headers();
+  const cookie = header.get("Cookie");
 
-  console.log(me);
+  const data = await loadMyInfoAPI({
+    headers: cookie ? { cookie } : undefined,
+  });
+  if (!data) {
+    redirect("/");
+  }
 
-  return (
-    <div>
-      <Image
-        src="https://picsum.photos/200"
-        alt="profile"
-        width="200"
-        height="200"
-      />
-      <h2>{me?.username}</h2>
-
-      <ProfileCard>
-        <li>
-          <small>Post</small>
-          <br />
-          <small>{me?.posts.length}</small>
-        </li>
-        <li>
-          <small>Followers</small>
-          <br />
-          <small>{me?.followers.length}</small>{" "}
-        </li>
-        <li>
-          <small>Followings</small>
-          <br />
-          <small>{me?.followings?.length}</small>{" "}
-        </li>
-      </ProfileCard>
-    </div>
-  );
+  return <ProfilePage />;
 };
 
-export default ProfilePage;
+export default Page;
