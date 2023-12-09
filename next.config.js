@@ -36,6 +36,7 @@ module.exports = {
       "picsum.photos",
       "firebasestorage.googleapis.com",
       "swiperjs.com",
+      "images.unsplash.com",
     ],
   },
 };

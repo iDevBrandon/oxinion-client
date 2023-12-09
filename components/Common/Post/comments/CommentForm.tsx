@@ -25,6 +25,7 @@ const CommentForm = ({ post }: any) => {
       setCommentText("");
       queryClient.refetchQueries(["posts"]);
     },
+    
   });
 
   const onSubmit = useCallback(

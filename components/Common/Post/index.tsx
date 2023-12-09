@@ -27,6 +27,7 @@ import PostImages from "./PostImages";
 import PostCardContent from "./PostCardContent";
 
 const Post = ({ post }: any) => {
+  const { data: me } = useMyInfoQuery();
   const [popoverOpen, setPopoverOpen] = useState(false);
   const [commentFormOpen, setCommentFormOpen] = useState(false);
   const { data: user, error } = useMyInfoQuery();
@@ -56,7 +57,7 @@ const Post = ({ post }: any) => {
             <ProfileWrapper>
               <img src="https://picsum.photos/201" alt="profile" />
               <div>
-                <b>iDevBrandon</b>
+                <b>{post?.author?.username}</b>
               </div>
             </ProfileWrapper>
 

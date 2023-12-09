@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import Link from "next/link";
 
 const PostCardContent = ({ postData }: any) => {
-  console.log(postData);
+  // console.log(postData);
   return (
     <CardContent>
       <Typography variant="body2">
